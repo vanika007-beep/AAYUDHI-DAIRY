@@ -3,108 +3,118 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Aayudhi Enterprises — Dairy Manager</title>
+<title>Aayudhi Enterprises</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Noto+Sans:wght@400;500;600&display=swap');
-:root {
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Noto+Sans:wght@400;500;600&display=swap');
+:root{
   --blue:#1565C0;--blue-d:#0D3B7A;--blue-l:#E3F2FD;
   --green:#2E7D32;--green-l:#E8F5E9;
   --orange:#E65100;--orange-l:#FFF3E0;
   --red:#C62828;--red-l:#FFEBEE;
   --yellow-l:#FFFDE7;
-  --gray-1:#F5F5F5;--gray-2:#EEEEEE;--gray-3:#BDBDBD;--gray-d:#424242;
-  --shadow:0 2px 12px rgba(0,0,0,0.10);--radius:14px;
-  --font:'Baloo 2',sans-serif;--font2:'Noto Sans',sans-serif;
+  --gray-1:#F5F5F5;--gray-2:#EEEEEE;--gray-3:#9E9E9E;--gray-d:#424242;
+  --white:#FFFFFF;--shadow:0 2px 10px rgba(0,0,0,0.08);--r:14px;
+  --f:'Baloo 2',sans-serif;--f2:'Noto Sans',sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-body{font-family:var(--font2);background:#F0F4F8;color:var(--gray-d);min-height:100vh;padding-bottom:80px;}
-.topbar{background:linear-gradient(135deg,var(--blue-d),var(--blue));color:white;padding:14px 16px 10px;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(13,59,122,0.4);}
-.topbar-title{font-family:var(--font);font-size:20px;font-weight:800;}
-.topbar-sub{font-size:11px;opacity:0.8;margin-top:1px;}
-.topbar-date{font-size:11px;opacity:0.7;float:right;margin-top:-26px;}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:white;display:flex;border-top:1px solid var(--gray-2);box-shadow:0 -2px 12px rgba(0,0,0,0.08);z-index:200;}
-.nav-btn{flex:1;padding:8px 2px;text-align:center;cursor:pointer;border:none;background:none;font-size:9px;color:var(--gray-3);font-family:var(--font2);}
-.nav-btn.active{color:var(--blue);}
-.nav-btn .icon{font-size:20px;display:block;margin-bottom:2px;}
-.page{display:none;padding:12px;}
+body{font-family:var(--f2);background:#EEF2F7;color:var(--gray-d);min-height:100vh;padding-bottom:72px;}
+/* TOPBAR */
+.topbar{background:linear-gradient(135deg,var(--blue-d),var(--blue));color:#fff;padding:10px 14px 8px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(13,59,122,0.35);}
+.tb-row1{display:flex;justify-content:space-between;align-items:center;}
+.tb-title{font-family:var(--f);font-size:19px;font-weight:800;}
+.sync-wrap{display:flex;align-items:center;gap:5px;font-size:10px;opacity:0.9;}
+#sync-dot{width:7px;height:7px;border-radius:50%;background:#9E9E9E;flex-shrink:0;transition:background 0.3s;}
+.tb-row2{display:flex;justify-content:space-between;align-items:center;margin-top:3px;}
+.tb-sub{font-size:10px;opacity:0.75;}
+#user-select{font-size:11px;padding:2px 6px;border-radius:6px;border:none;background:rgba(255,255,255,0.18);color:#fff;max-width:120px;outline:none;}
+#user-select option{color:#333;background:#fff;}
+/* BOTTOM NAV */
+.bnav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;border-top:1px solid var(--gray-2);box-shadow:0 -2px 10px rgba(0,0,0,0.07);z-index:200;}
+.nb{flex:1;padding:6px 2px;text-align:center;cursor:pointer;border:none;background:none;font-size:9px;color:var(--gray-3);font-family:var(--f2);}
+.nb.active{color:var(--blue);}
+.nb .ic{font-size:20px;display:block;margin-bottom:1px;}
+/* PAGES */
+.page{display:none;padding:10px;}
 .page.active{display:block;}
-.card{background:white;border-radius:var(--radius);padding:14px;margin-bottom:12px;box-shadow:var(--shadow);}
-.card-title{font-family:var(--font);font-size:15px;font-weight:700;color:var(--blue-d);margin-bottom:10px;}
-.chip-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
-.chip{border-radius:12px;padding:12px 14px;font-family:var(--font);}
-.chip-label{font-size:10px;font-weight:600;opacity:0.75;text-transform:uppercase;letter-spacing:0.5px;}
-.chip-val{font-size:20px;font-weight:800;margin-top:2px;}
-.chip-blue{background:var(--blue-l);color:var(--blue-d);}
-.chip-green{background:var(--green-l);color:var(--green);}
-.chip-orange{background:var(--orange-l);color:var(--orange);}
-.chip-red{background:var(--red-l);color:var(--red);}
-.chip-purple{background:#F3E5F5;color:#6A1B9A;}
-input,textarea,select{font-family:var(--font2);font-size:14px;border:1.5px solid var(--gray-2);border-radius:8px;padding:9px 12px;width:100%;outline:none;background:var(--gray-1);transition:border 0.2s;}
-input:focus,textarea:focus,select:focus{border-color:var(--blue);background:white;}
-label{font-size:12px;font-weight:600;color:var(--gray-d);display:block;margin-bottom:4px;margin-top:10px;}
-.btn{border:none;border-radius:10px;padding:12px 18px;font-family:var(--font);font-size:14px;font-weight:700;cursor:pointer;width:100%;margin-top:8px;}
+/* CARD */
+.card{background:#fff;border-radius:var(--r);padding:13px;margin-bottom:10px;box-shadow:var(--shadow);}
+.card-title{font-family:var(--f);font-size:14px;font-weight:700;color:var(--blue-d);margin-bottom:10px;}
+/* CHIPS */
+.chip-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
+.chip{border-radius:10px;padding:10px 12px;font-family:var(--f);}
+.cl{font-size:10px;font-weight:600;opacity:0.72;text-transform:uppercase;letter-spacing:0.4px;}
+.cv{font-size:19px;font-weight:800;margin-top:2px;}
+.c-blue{background:var(--blue-l);color:var(--blue-d);}
+.c-green{background:var(--green-l);color:var(--green);}
+.c-orange{background:var(--orange-l);color:var(--orange);}
+.c-red{background:var(--red-l);color:var(--red);}
+/* FORMS */
+input,textarea,select{font-family:var(--f2);font-size:14px;border:1.5px solid var(--gray-2);border-radius:8px;padding:8px 11px;width:100%;outline:none;background:var(--gray-1);}
+input:focus,select:focus,textarea:focus{border-color:var(--blue);background:#fff;}
+label{font-size:11px;font-weight:600;color:var(--gray-d);display:block;margin-bottom:3px;margin-top:9px;}
+/* BUTTONS */
+.btn{border:none;border-radius:10px;padding:11px 16px;font-family:var(--f);font-size:14px;font-weight:700;cursor:pointer;width:100%;margin-top:8px;transition:opacity 0.15s;}
 .btn:active{opacity:0.8;}
-.btn-blue{background:var(--blue);color:white;}
-.btn-green{background:var(--green);color:white;}
-.btn-orange{background:var(--orange);color:white;}
-.btn-red{background:var(--red);color:white;}
-.btn-sm{padding:7px 10px;font-size:12px;border-radius:8px;margin-top:0;width:auto;}
-.divider{height:1px;background:var(--gray-2);margin:10px 0;}
-.small{font-size:11px;color:var(--gray-3);}
-.bold{font-weight:700;}
-.green-text{color:var(--green);}
-.red-text{color:var(--red);}
-.blue-text{color:var(--blue);}
-.section-hdr{font-family:var(--font);font-size:12px;font-weight:700;color:var(--blue);text-transform:uppercase;margin:14px 0 6px;border-left:4px solid var(--blue);padding-left:8px;}
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:500;align-items:flex-end;}
-.modal-overlay.open{display:flex;}
-.modal{background:white;border-radius:20px 20px 0 0;padding:20px 16px 30px;width:100%;max-height:88vh;overflow-y:auto;animation:slideUp 0.25s ease;}
-@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.modal-handle{width:40px;height:4px;background:var(--gray-2);border-radius:2px;margin:0 auto 14px;}
-.modal-title{font-family:var(--font);font-size:17px;font-weight:800;color:var(--blue-d);margin-bottom:12px;}
-.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#333;color:white;padding:10px 20px;border-radius:30px;font-size:13px;z-index:1000;opacity:0;transition:opacity 0.3s;pointer-events:none;white-space:nowrap;}
-.toast.show{opacity:1;}
-
-/* ORDER TABLE */
-.tbl{width:100%;border-collapse:collapse;font-size:13px;}
-.tbl th{background:var(--blue-d);color:white;padding:7px 6px;font-size:11px;font-weight:700;}
-.tbl td{padding:6px 6px;border-bottom:1px solid var(--gray-2);vertical-align:middle;}
+.btn-blue{background:var(--blue);color:#fff;}
+.btn-green{background:var(--green);color:#fff;}
+.btn-orange{background:var(--orange);color:#fff;}
+.btn-red{background:var(--red);color:#fff;}
+.btn-outline{background:#fff;color:var(--blue);border:2px solid var(--blue);}
+.btn-sm{padding:6px 10px;font-size:12px;border-radius:7px;margin-top:0;width:auto;}
+/* SECTION HDR */
+.shdr{font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;margin:12px 0 6px;border-left:3px solid var(--blue);padding-left:7px;}
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;font-size:12px;}
+.tbl th{background:var(--blue-d);color:#fff;padding:6px 5px;font-size:10px;font-weight:700;}
+.tbl td{padding:5px 5px;border-bottom:1px solid var(--gray-2);vertical-align:middle;}
 .tbl tr:last-child td{border-bottom:none;}
 .tbl tr:nth-child(even) td{background:var(--gray-1);}
-.qty-inp{width:70px;padding:6px 4px;text-align:center;font-size:14px;font-weight:700;border:1.5px solid var(--gray-2);border-radius:6px;background:white;}
-.qty-inp:focus{border-color:var(--blue);}
-
-/* STOCK TABLE */
-.stk-row{display:grid;grid-template-columns:1fr 60px 60px 60px 60px;gap:4px;align-items:center;padding:6px 8px;border-bottom:1px solid var(--gray-2);font-size:12px;}
-.stk-hdr{background:var(--blue-d);color:white;border-radius:8px 8px 0 0;font-size:10px;font-weight:700;padding:7px 8px;}
-.stk-inp{width:100%;padding:5px 4px;text-align:center;font-size:13px;font-weight:700;border:1.5px solid var(--gray-2);border-radius:6px;background:var(--yellow-l);}
-.stock-low{background:var(--red-l)!important;}
-.stock-ok{background:var(--green-l)!important;}
-
+.qi{width:58px;padding:5px 3px;text-align:center;font-size:13px;font-weight:700;border:1.5px solid var(--gray-2);border-radius:6px;background:#fff;}
+.qi:focus{border-color:var(--blue);}
+.ri{width:62px;padding:5px 3px;text-align:center;font-size:12px;border:1.5px solid var(--gray-2);border-radius:6px;background:#fff;}
+.ri.set{border-color:var(--green);background:var(--green-l);}
 /* SHOP ROW */
-.shop-row{display:grid;grid-template-columns:1fr 72px 72px 72px;gap:4px;align-items:center;padding:8px 10px;border-bottom:1px solid var(--gray-2);font-size:12px;cursor:pointer;}
-.shop-hdr{background:var(--blue-d);color:white;border-radius:8px 8px 0 0;padding:7px 10px;font-size:10px;font-weight:700;}
-
-/* CHALLAN */
-.challan-table{width:100%;border-collapse:collapse;font-size:11px;}
-.challan-table th{background:var(--blue-d);color:white;padding:5px;text-align:center;}
-.challan-table td{padding:5px 4px;border-bottom:1px solid var(--gray-2);}
+.srow{display:grid;grid-template-columns:1fr 70px 70px 70px;gap:3px;align-items:center;padding:7px 9px;border-bottom:1px solid var(--gray-2);cursor:pointer;}
+.shdr-row{background:var(--blue-d);color:#fff;border-radius:8px 8px 0 0;font-size:10px;font-weight:700;padding:6px 9px;}
+/* MODAL */
+.moverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.48);z-index:500;align-items:flex-end;}
+.moverlay.open{display:flex;}
+.modal{background:#fff;border-radius:18px 18px 0 0;padding:18px 14px 28px;width:100%;max-height:88vh;overflow-y:auto;animation:su 0.22s ease;}
+@keyframes su{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.mhandle{width:38px;height:4px;background:var(--gray-2);border-radius:2px;margin:0 auto 13px;}
+.mtitle{font-family:var(--f);font-size:16px;font-weight:800;color:var(--blue-d);margin-bottom:12px;}
+/* CHALLAN BILL */
+.cbill{background:#fff;border:1px solid var(--gray-2);border-radius:8px;padding:12px;font-size:11px;}
+.ctbl{width:100%;border-collapse:collapse;font-size:11px;margin-top:6px;}
+.ctbl th{background:var(--blue-d);color:#fff;padding:4px;text-align:center;font-size:10px;}
+.ctbl td{padding:4px 3px;border-bottom:1px solid var(--gray-2);}
+/* DIVIDER */
+.dv{height:1px;background:var(--gray-2);margin:9px 0;}
+/* HELPERS */
+.bold{font-weight:700;}
+.sm{font-size:11px;color:var(--gray-3);}
+.gt{color:var(--green);}
+.rt{color:var(--red);}
+.bt{color:var(--blue);}
+/* TOAST */
+.toast{position:fixed;bottom:82px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:9px 18px;border-radius:28px;font-size:12px;z-index:1000;opacity:0;transition:opacity 0.25s;pointer-events:none;white-space:nowrap;}
+.toast.show{opacity:1;}
+/* STK ROW */
+.stk-row{display:grid;grid-template-columns:1fr 56px 56px 56px 56px;gap:3px;align-items:center;padding:5px 8px;border-bottom:1px solid var(--gray-2);font-size:12px;}
+.stk-inp{width:100%;padding:4px 3px;text-align:center;font-size:12px;font-weight:700;border:1.5px solid var(--gray-2);border-radius:5px;background:var(--yellow-l);}
 </style>
 </head>
 <body>
 
+<!-- TOPBAR -->
 <div class="topbar">
-  <div class="topbar-date" id="topDate"></div>
-  <div style="display:flex;justify-content:space-between;align-items:center">
-    <div class="topbar-title">🥛 Aayudhi Enterprises</div>
-    <div id="sync-status" style="display:flex;align-items:center;gap:5px;font-size:11px;opacity:0.85">
-      <div id="sync-dot" style="width:7px;height:7px;border-radius:50%;background:#999;flex-shrink:0"></div>
-      <span id="sync-label">Connecting...</span>
-    </div>
+  <div class="tb-row1">
+    <div class="tb-title">🥛 Aayudhi Enterprises</div>
+    <div class="sync-wrap"><div id="sync-dot"></div><span id="sync-lbl">Connecting...</span></div>
   </div>
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2px">
-    <div class="topbar-sub">NIF Pvt Ltd (Namaste India) · Patna</div>
-    <select id="user-select" onchange="setUser(this.value)" style="font-size:11px;padding:2px 6px;border-radius:6px;border:none;background:rgba(255,255,255,0.2);color:white;max-width:110px">
+  <div class="tb-row2">
+    <div class="tb-sub">NIF Pvt Ltd (Namaste India) · Patna</div>
+    <select id="user-select" onchange="setUser(this.value)">
       <option value="Owner">👑 Owner</option>
       <option value="Delivery 1">🛵 Delivery 1</option>
       <option value="Delivery 2">🛵 Delivery 2</option>
@@ -113,231 +123,130 @@ label{font-size:12px;font-weight:600;color:var(--gray-d);display:block;margin-bo
   </div>
 </div>
 
-<!-- PAGE 1: DIARY -->
+<!-- PAGE: DIARY -->
 <div class="page active" id="page-home">
-  <div class="chip-row" style="margin-top:12px">
-    <div class="chip chip-red"><div class="chip-label">Paid to Co.</div><div class="chip-val" id="d-paid">₹0</div></div>
-    <div class="chip chip-green"><div class="chip-label">Total Collected</div><div class="chip-val" id="d-coll">₹0</div></div>
-    <div class="chip chip-blue"><div class="chip-label">Cash</div><div class="chip-val" id="d-cash">₹0</div></div>
-    <div class="chip chip-orange"><div class="chip-label">Online/UPI</div><div class="chip-val" id="d-online">₹0</div></div>
+  <div class="chip-row" style="margin-top:10px">
+    <div class="chip c-red"><div class="cl">Paid to Co.</div><div class="cv" id="d-paid">₹0</div></div>
+    <div class="chip c-green"><div class="cl">Total Collected</div><div class="cv" id="d-coll">₹0</div></div>
+    <div class="chip c-blue"><div class="cl">Cash</div><div class="cv" id="d-cash">₹0</div></div>
+    <div class="chip c-orange"><div class="cl">Online/UPI</div><div class="cv" id="d-online">₹0</div></div>
   </div>
   <div class="card">
     <div class="card-title">📒 Daily Diary Entry</div>
     <label>Date</label><input type="date" id="diary-date">
-    <label>Amount Paid to Company (₹)</label>
-    <input type="number" id="diary-paid" placeholder="e.g. 31000" inputmode="numeric">
-    <label>Collection — Cash (₹)</label>
-    <input type="number" id="diary-cash" placeholder="e.g. 20000" inputmode="numeric">
-    <label>Collection — Online / UPI (₹)</label>
-    <input type="number" id="diary-online" placeholder="e.g. 7000" inputmode="numeric">
-    <label>Invoice No. (optional)</label>
-    <input type="text" id="diary-inv" placeholder="e.g. BS039462101013">
-    <div style="display:flex;justify-content:space-between;padding:10px;background:var(--gray-1);border-radius:8px;margin-top:10px">
-      <span class="bold">Total Collected:</span><span class="bold green-text" style="font-size:17px" id="d-tot-prev">₹0</span>
+    <label>Amount Paid to Company (₹)</label><input type="number" id="diary-paid" placeholder="e.g. 31000" inputmode="numeric">
+    <label>Collection — Cash (₹)</label><input type="number" id="diary-cash" placeholder="e.g. 20000" inputmode="numeric">
+    <label>Collection — Online/UPI (₹)</label><input type="number" id="diary-online" placeholder="e.g. 7000" inputmode="numeric">
+    <label>Invoice No. (optional)</label><input type="text" id="diary-inv" placeholder="e.g. BS039462101013">
+    <div style="display:flex;justify-content:space-between;padding:9px;background:var(--gray-1);border-radius:8px;margin-top:9px">
+      <span class="bold">Total Collected:</span><span class="bold gt" style="font-size:16px" id="d-tot">₹0</span>
     </div>
-    <div style="display:flex;justify-content:space-between;padding:8px 10px;background:var(--blue-l);border-radius:8px;margin-top:6px">
-      <span class="bold">Daily P&L:</span><span class="bold" style="font-size:17px" id="d-pl-prev">₹0</span>
+    <div style="display:flex;justify-content:space-between;padding:8px 9px;background:var(--blue-l);border-radius:8px;margin-top:5px">
+      <span class="bold">Daily P&L:</span><span class="bold" style="font-size:16px" id="d-pl">₹0</span>
     </div>
     <button class="btn btn-blue" onclick="saveDiary()">💾 Save Entry</button>
   </div>
   <div class="card">
     <div class="card-title">📅 Recent Entries</div>
-    <div id="diary-list"><div class="small" style="text-align:center;padding:10px">No entries yet</div></div>
+    <div id="diary-list"><div class="sm" style="text-align:center;padding:10px">No entries yet</div></div>
   </div>
 </div>
 
-<!-- PAGE 2: ORDER -->
+<!-- PAGE: ORDER -->
 <div class="page" id="page-order">
   <div class="card">
     <div class="card-title">📦 Daily Order Entry</div>
-    <div style="display:flex;gap:8px;margin-bottom:10px">
+    <div style="display:flex;gap:8px;margin-bottom:8px">
       <input type="date" id="order-date" style="flex:1">
       <button class="btn btn-outline btn-sm" onclick="clearOrder()">🗑 Clear</button>
     </div>
-    <div style="font-size:11px;padding:7px 10px;background:var(--blue-l);border-radius:8px;color:var(--blue-d);margin-bottom:8px">
-      Enter CRT quantity for each item. Paneer is entered in pieces.
+    <div style="font-size:11px;padding:6px 9px;background:var(--blue-l);border-radius:7px;color:var(--blue-d);margin-bottom:8px">Enter CRT quantity received. Paneer in pieces.</div>
+    <div style="background:var(--blue-d);color:#fff;border-radius:8px 8px 0 0;padding:7px 8px;display:grid;grid-template-columns:1fr 52px 52px 62px;gap:4px">
+      <span style="font-size:10px;font-weight:700">ITEM</span>
+      <span style="font-size:10px;font-weight:700;text-align:center">UNIT</span>
+      <span style="font-size:10px;font-weight:700;text-align:center">QTY</span>
+      <span style="font-size:10px;font-weight:700;text-align:center">TOTAL PCS</span>
     </div>
-
-    <table class="tbl" id="order-table">
-      <thead>
-        <tr>
-          <th style="text-align:left;width:40%">Item</th>
-          <th>Unit</th>
-          <th>Pcs/CRT</th>
-          <th>Qty</th>
-          <th>Total Pcs</th>
-        </tr>
-      </thead>
-      <tbody id="order-tbody"></tbody>
-      <tfoot>
-        <tr>
-          <td colspan="3" style="font-weight:700;padding:8px 6px;background:var(--blue-d);color:white">TOTALS</td>
-          <td style="font-weight:700;text-align:center;background:var(--blue-d);color:white" id="order-total-crt">0</td>
-          <td style="font-weight:700;text-align:center;background:var(--blue-d);color:white" id="order-total-pcs">0</td>
-        </tr>
-      </tfoot>
-    </table>
-
-    <label>Actual Amount Paid to Company (₹)</label>
+    <div style="background:#fff;border:1.5px solid var(--gray-2);border-top:none;border-radius:0 0 8px 8px;padding:3px 7px" id="order-list"></div>
+    <div style="display:flex;justify-content:space-between;padding:9px 11px;background:var(--red-l);border-radius:8px;margin-top:10px">
+      <span class="bold">Total Crates/Pcs:</span><span class="bold rt" style="font-size:18px" id="o-total">0</span>
+    </div>
+    <label>Amount Paid to Company (₹)</label>
     <input type="number" id="order-paid" placeholder="From company invoice" inputmode="numeric">
     <button class="btn btn-blue" onclick="saveOrder()">💾 Save Order</button>
-    <button class="btn btn-outline" style="margin-top:6px" onclick="copyOrderSummary()">📋 Copy (WhatsApp)</button>
+    <button class="btn btn-outline" style="margin-top:6px" onclick="copyOrder()">📋 Copy (WhatsApp)</button>
   </div>
 </div>
 
-<!-- PAGE 3: SHOPS -->
+<!-- PAGE: SHOPS -->
 <div class="page" id="page-shops">
-  <div style="display:flex;gap:8px;margin-bottom:10px">
-    <button class="btn btn-blue btn-sm" onclick="openAddShop()">+ Add Shop</button>
-    <input type="text" placeholder="🔍 Search shop..." id="shop-search" oninput="renderShops()" style="flex:1;padding:8px 10px;font-size:13px">
+  <div style="display:flex;gap:7px;margin-bottom:9px">
+    <button class="btn btn-blue btn-sm" onclick="openModal('m-addshop')">+ Add Shop</button>
+    <input type="text" id="shop-search" placeholder="🔍 Search..." oninput="renderShops()" style="flex:1;padding:7px 10px;font-size:13px">
   </div>
-  <div class="card" style="padding:10px">
-    <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:8px">
-      <span>Total Shops: <b id="shops-count">0</b></span>
-      <span class="red-text bold">Total Due: <b id="shops-total-out">₹0</b></span>
+  <div class="card" style="padding:9px">
+    <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:7px">
+      <span>Shops: <b id="s-count">0</b></span>
+      <span class="rt bold">Total Due: <b id="s-total">₹0</b></span>
     </div>
-    <div class="shop-hdr" style="display:grid;grid-template-columns:1fr 72px 72px 72px;gap:4px">
-      <div>Shop / Phone</div><div style="text-align:center">B/F (₹)</div>
-      <div style="text-align:center">Paid Today</div><div style="text-align:center">Due (₹)</div>
+    <div class="shdr-row" style="display:grid;grid-template-columns:1fr 70px 70px 70px;gap:3px">
+      <div>Shop / Phone</div><div style="text-align:center">B/F</div>
+      <div style="text-align:center">Paid Today</div><div style="text-align:center">Due</div>
     </div>
     <div id="shop-list" style="border:1.5px solid var(--gray-2);border-top:none;border-radius:0 0 8px 8px;"></div>
   </div>
 </div>
 
-<!-- PAGE 4: CHALLAN -->
+<!-- PAGE: CHALLAN -->
 <div class="page" id="page-challan">
   <div class="card">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:9px">
       <div class="card-title" style="margin-bottom:0">🧾 Delivery Challan</div>
-      <button onclick="openManageItems()" style="border:none;background:var(--blue-l);color:var(--blue);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;cursor:pointer">⚙️ Items & Rates</button>
+      <button onclick="openModal('m-items')" style="border:none;background:var(--blue-l);color:var(--blue);border-radius:7px;padding:5px 10px;font-size:11px;font-weight:700;cursor:pointer">⚙️ Items & Rates</button>
     </div>
     <label>Select Shop</label>
-    <select id="challan-shop" onchange="loadShopBalance()"><option value="">-- Select Shop --</option></select>
-    <label>Date</label><input type="date" id="challan-date">
-
-    <div class="section-hdr">Items Delivered (Pieces)</div>
-    <table class="tbl" id="challan-table">
-      <thead><tr>
-        <th style="text-align:left;width:40%">Item</th>
-        <th>PCS</th><th>Rate(₹)</th><th>Amt(₹)</th>
-      </tr></thead>
-      <tbody id="challan-tbody"></tbody>
-    </table>
-
-    <div class="divider"></div>
-    <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span>Today's Bill:</span><span class="bold blue-text" id="c-today">₹0</span></div>
-    <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span>Balance B/F:</span><span class="bold red-text" id="c-prev">₹0</span></div>
-    <div style="display:flex;justify-content:space-between;padding:9px 10px;background:var(--red-l);border-radius:8px;margin-bottom:10px">
-      <span class="bold">Grand Total Due:</span><span class="bold red-text" style="font-size:20px" id="c-grand">₹0</span>
+    <select id="c-shop" onchange="loadShopBal()"><option value="">-- Select Shop --</option></select>
+    <label>Date</label><input type="date" id="c-date">
+    <div class="shdr">Items Delivered (Pieces)</div>
+    <div style="background:var(--blue-d);color:#fff;border-radius:8px 8px 0 0;padding:6px 8px;display:grid;grid-template-columns:1fr 58px 62px 58px;gap:4px">
+      <span style="font-size:10px;font-weight:700">ITEM</span>
+      <span style="font-size:10px;font-weight:700;text-align:center">PCS</span>
+      <span style="font-size:10px;font-weight:700;text-align:center">RATE(₹)</span>
+      <span style="font-size:10px;font-weight:700;text-align:center">AMT(₹)</span>
     </div>
-    <label>Collected — Cash (₹)</label>
-    <input type="number" id="c-cash" placeholder="0" inputmode="numeric" oninput="updateCBal()">
-    <label>Collected — Online/UPI (₹)</label>
-    <input type="number" id="c-online" placeholder="0" inputmode="numeric" oninput="updateCBal()">
-    <div style="display:flex;justify-content:space-between;padding:9px 10px;background:var(--red-l);border-radius:8px;margin-top:10px">
-      <span class="bold">Balance Remaining:</span><span class="bold red-text" style="font-size:20px" id="c-bal">₹0</span>
+    <div style="background:#fff;border:1.5px solid var(--gray-2);border-top:none;border-radius:0 0 8px 8px;padding:3px 7px" id="c-list"></div>
+    <div class="dv"></div>
+    <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span>Today's Bill:</span><span class="bold bt" id="c-today">₹0</span></div>
+    <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span>Balance B/F:</span><span class="bold rt" id="c-prev">₹0</span></div>
+    <div style="display:flex;justify-content:space-between;padding:8px 10px;background:var(--red-l);border-radius:8px;margin-bottom:9px">
+      <span class="bold">Grand Total Due:</span><span class="bold rt" style="font-size:19px" id="c-grand">₹0</span>
     </div>
-    <button class="btn btn-green" onclick="saveChallan()" style="margin-top:12px">✅ Save & Generate Bill</button>
+    <label>Collected — Cash (₹)</label><input type="number" id="c-cash" placeholder="0" inputmode="numeric" oninput="updateCBal()">
+    <label>Collected — Online/UPI (₹)</label><input type="number" id="c-online" placeholder="0" inputmode="numeric" oninput="updateCBal()">
+    <div style="display:flex;justify-content:space-between;padding:8px 10px;background:var(--red-l);border-radius:8px;margin-top:9px">
+      <span class="bold">Balance Remaining:</span><span class="bold rt" style="font-size:19px" id="c-bal">₹0</span>
+    </div>
+    <button class="btn btn-green" onclick="saveChallan()" style="margin-top:11px">✅ Save & Generate Bill</button>
   </div>
-  <div class="card" id="challan-output" style="display:none">
-    <div id="challan-print-area"></div>
-
-    <!-- EDIT BILL AFTER SAVING -->
-    <div style="background:var(--yellow-l);border-radius:8px;padding:10px;margin-top:12px;border:1.5px solid #F9A825">
-      <div style="font-size:12px;font-weight:700;color:var(--orange);margin-bottom:8px">✏️ Edit Bill Details</div>
+  <!-- BILL OUTPUT -->
+  <div class="card" id="c-output" style="display:none">
+    <div id="c-print"></div>
+    <div style="background:var(--yellow-l);border-radius:8px;padding:9px;margin-top:10px;border:1.5px solid #F9A825">
+      <div style="font-size:11px;font-weight:700;color:var(--orange);margin-bottom:7px">✏️ Edit Bill Details</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px">
-        <div>
-          <div style="font-size:11px;font-weight:600;margin-bottom:3px">Bill No.</div>
-          <input type="text" id="bill-no" placeholder="e.g. 001" style="padding:7px 8px;font-size:13px">
-        </div>
-        <div>
-          <div style="font-size:11px;font-weight:600;margin-bottom:3px">Delivery Boy</div>
-          <input type="text" id="bill-staff" placeholder="Staff name" style="padding:7px 8px;font-size:13px">
-        </div>
+        <div><div style="font-size:10px;font-weight:600;margin-bottom:2px">Bill No.</div>
+          <input type="text" id="b-no" placeholder="001" style="padding:6px 8px;font-size:13px"></div>
+        <div><div style="font-size:10px;font-weight:600;margin-bottom:2px">Staff Name</div>
+          <input type="text" id="b-staff" placeholder="Name" style="padding:6px 8px;font-size:13px"></div>
       </div>
-      <div style="margin-bottom:6px">
-        <div style="font-size:11px;font-weight:600;margin-bottom:3px">Remarks / Note</div>
-        <input type="text" id="bill-note" placeholder="e.g. Short delivery, return item..." style="padding:7px 8px;font-size:13px">
-      </div>
-      <button class="btn btn-orange" onclick="regenerateBill()" style="margin-top:4px">🔄 Update Bill</button>
+      <div style="font-size:10px;font-weight:600;margin-bottom:2px">Note / Remarks</div>
+      <input type="text" id="b-note" placeholder="e.g. Short delivery..." style="padding:6px 8px;font-size:13px">
+      <button class="btn btn-orange" onclick="regenerateBill()" style="margin-top:7px">🔄 Update Bill</button>
     </div>
-
-    <div style="display:flex;gap:8px;margin-top:10px">
-      <button class="btn btn-green" onclick="sendToWhatsApp()" style="flex:1;margin-top:0">📲 Send on WhatsApp</button>
-      <button class="btn btn-outline" onclick="copyChallan()" style="flex:1;margin-top:0">📋 Copy Text</button>
+    <div style="display:flex;gap:7px;margin-top:9px">
+      <button class="btn btn-green" onclick="sendWA()" style="flex:1;margin-top:0">📲 Send on WhatsApp</button>
+      <button class="btn btn-outline" onclick="copyBill()" style="flex:1;margin-top:0">📋 Copy Text</button>
     </div>
-  </div>
-</div>
-
-<!-- PAGE 5: STOCK -->
-<div class="page" id="page-stock">
-  <div class="card">
-    <div class="card-title">📊 Stock Management</div>
-    <div style="font-size:11px;padding:7px 10px;background:var(--blue-l);border-radius:8px;color:var(--blue-d);margin-bottom:10px">
-      Update opening stock when order arrives (4 AM). App auto-deducts from challan deliveries.
-    </div>
-    <div style="display:flex;gap:8px;margin-bottom:10px">
-      <button class="btn btn-blue btn-sm" onclick="saveStock()">💾 Save Stock</button>
-      <button class="btn btn-outline btn-sm" onclick="resetStock()">🔄 Reset</button>
-    </div>
-
-    <div class="stk-row stk-hdr" style="display:grid;grid-template-columns:1fr 60px 60px 60px 60px;gap:4px">
-      <div>Item</div>
-      <div style="text-align:center">Opening<br>(CRT/PCS)</div>
-      <div style="text-align:center">Delivered<br>(CRT/PCS)</div>
-      <div style="text-align:center">Remaining<br>(CRT/PCS)</div>
-      <div style="text-align:center">Remaining<br>(PCS)</div>
-    </div>
-    <div id="stock-list" style="border:1.5px solid var(--gray-2);border-top:none;border-radius:0 0 8px 8px;"></div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">⚠️ Low Stock Alerts</div>
-    <div id="low-stock-list"><div class="small" style="text-align:center;padding:10px">No low stock items</div></div>
-  </div>
-</div>
-
-<!-- PAGE 6: REPORT -->
-<div class="page" id="page-report">
-  <div class="card">
-    <div class="card-title">📈 Monthly Report</div>
-    <div class="chip-row">
-      <div class="chip chip-red"><div class="chip-label">Paid to Co.</div><div class="chip-val" id="rep-paid">₹0</div></div>
-      <div class="chip chip-green"><div class="chip-label">Collected</div><div class="chip-val" id="rep-coll">₹0</div></div>
-      <div class="chip chip-blue"><div class="chip-label">Net P&L</div><div class="chip-val" id="rep-pl">₹0</div></div>
-      <div class="chip chip-orange"><div class="chip-label">Collection%</div><div class="chip-val" id="rep-pct">0%</div></div>
-    </div>
-    <div class="chip-row">
-      <div class="chip chip-blue"><div class="chip-label">Total Cash</div><div class="chip-val" id="rep-cash">₹0</div></div>
-      <div class="chip chip-green"><div class="chip-label">Total Online</div><div class="chip-val" id="rep-online">₹0</div></div>
-    </div>
-    <div id="monthly-table"></div>
-    <button class="btn btn-outline" onclick="exportDiary()" style="margin-top:8px">📋 Copy Month Data</button>
-    <button class="btn btn-orange" onclick="backupData()" style="margin-top:6px">💾 Backup All Data (WhatsApp)</button>
-    <button class="btn btn-outline" onclick="restoreData()" style="margin-top:6px">📥 Restore from Backup</button>
-  </div>
-</div>
-
-<!-- MODAL: ADD SHOP -->
-<div class="modal-overlay" id="modal-addshop">
-  <div class="modal">
-    <div class="modal-handle"></div>
-    <div class="modal-title">➕ Add New Shop</div>
-    <label>Shop Name *</label><input type="text" id="ns-name" placeholder="e.g. Sharma General Store">
-    <label>Phone Number</label><input type="tel" id="ns-phone" placeholder="9876543210" inputmode="numeric">
-    <label>Opening Balance Due (₹)</label><input type="number" id="ns-bal" placeholder="0" value="0" inputmode="numeric">
-    <button class="btn btn-green" onclick="addShop()">✅ Add Shop</button>
-    <button class="btn btn-outline" onclick="closeModal('modal-addshop')">Cancel</button>
-  </div>
-</div>
-
-<!-- MODAL: SHOP DETAIL -->
-<div class="modal-overlay" id="modal-shopdetail">
-  <div class="modal">
-    <div class="modal-handle"></div>
-    <div class="modal-title" id="modal-shop-title">Shop</div>
-    <div id="modal-shop-content"></div>
-    <button class="btn btn-outline" style="margin-top:10px" onclick="closeModal('modal-shopdetail')">Close</button>
   </div>
 </div>
 
@@ -348,288 +257,361 @@ label{font-size:12px;font-weight:600;color:var(--gray-d);display:block;margin-bo
     <label>Date</label><input type="date" id="exp-date">
     <label>Category</label>
     <select id="exp-cat">
-      <option value="Fuel">⛽ Fuel</option>
-      <option value="Miscellaneous">📦 Miscellaneous</option>
-      <option value="Vehicle Repair">🔧 Vehicle Repair</option>
-      <option value="Staff Payment">👷 Staff Payment</option>
-      <option value="Phone/Recharge">📱 Phone/Recharge</option>
-      <option value="Loading/Unloading">🏋️ Loading/Unloading</option>
-      <option value="Other">🔹 Other</option>
+      <option>⛽ Fuel</option><option>📦 Miscellaneous</option>
+      <option>🔧 Vehicle Repair</option><option>👷 Staff Payment</option>
+      <option>📱 Phone/Recharge</option><option>🏋️ Loading/Unloading</option>
+      <option>🔹 Other</option>
     </select>
-    <label>Description</label>
-    <input type="text" id="exp-desc" placeholder="e.g. Diesel for delivery van">
-    <label>Amount (₹)</label>
-    <input type="number" id="exp-amt" placeholder="e.g. 500" inputmode="numeric">
+    <label>Description</label><input type="text" id="exp-desc" placeholder="e.g. Diesel for van">
+    <label>Amount (₹)</label><input type="number" id="exp-amt" placeholder="e.g. 500" inputmode="numeric">
     <button class="btn btn-orange" onclick="saveExpense()">💾 Save Expense</button>
   </div>
-
   <div class="card">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-      <span class="bold" style="font-size:14px">This Month's Expenses</span>
-      <span class="bold red-text" style="font-size:16px" id="exp-total-month">₹0</span>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:9px">
+      <span class="bold">This Month</span><span class="bold rt" id="exp-total">₹0</span>
     </div>
-    <div class="chip-row" style="margin-bottom:10px">
-      <div class="chip chip-orange"><div class="chip-label">⛽ Fuel</div><div class="chip-val" id="exp-fuel">₹0</div></div>
-      <div class="chip chip-red"><div class="chip-label">📦 Misc</div><div class="chip-val" id="exp-misc">₹0</div></div>
+    <div class="chip-row" style="margin-bottom:9px">
+      <div class="chip c-orange"><div class="cl">⛽ Fuel</div><div class="cv" id="exp-fuel">₹0</div></div>
+      <div class="chip c-red"><div class="cl">📦 Other</div><div class="cv" id="exp-misc">₹0</div></div>
     </div>
-    <div id="exp-list"><div class="small" style="text-align:center;padding:10px">No expenses yet</div></div>
+    <div id="exp-list"><div class="sm" style="text-align:center;padding:10px">No expenses yet</div></div>
   </div>
 </div>
 
-<!-- MODAL: EDIT DIARY -->
-<div class="modal-overlay" id="modal-edit-diary">
-  <div class="modal">
-    <div class="modal-handle"></div>
-    <div class="modal-title">✏️ Edit Diary Entry</div>
-    <input type="hidden" id="edit-diary-date-orig">
-    <label>Date</label><input type="date" id="edit-diary-date">
-    <label>Paid to Company (₹)</label><input type="number" id="edit-diary-paid" inputmode="numeric">
-    <label>Collection Cash (₹)</label><input type="number" id="edit-diary-cash" inputmode="numeric">
-    <label>Collection Online (₹)</label><input type="number" id="edit-diary-online" inputmode="numeric">
-    <label>Invoice No.</label><input type="text" id="edit-diary-inv">
-    <button class="btn btn-blue" onclick="updateDiaryEntry()">✅ Save Changes</button>
-    <button class="btn btn-red" onclick="deleteDiaryEntry()" style="margin-top:6px">🗑 Delete Entry</button>
-    <button class="btn btn-outline" onclick="closeModal('modal-edit-diary')">Cancel</button>
+<!-- PAGE: STOCK -->
+<div class="page" id="page-stock">
+  <div class="card">
+    <div class="card-title">📊 Stock Management</div>
+    <div style="font-size:11px;padding:6px 9px;background:var(--blue-l);border-radius:7px;color:var(--blue-d);margin-bottom:9px">Update opening stock when order arrives at 4 AM. Challan deliveries auto-deduct.</div>
+    <div style="display:flex;gap:7px;margin-bottom:9px">
+      <button class="btn btn-blue btn-sm" onclick="saveStock()">💾 Save Stock</button>
+      <button class="btn btn-outline btn-sm" onclick="if(confirm('Reset delivered to 0?')){SKUS.forEach((_,i)=>{if(DB.stock[i])DB.stock[i].delivered=0;});saveDB();renderStock();showToast('✅ Reset');}">🔄 Reset Delivered</button>
+    </div>
+    <div class="stk-row" style="background:var(--blue-d);color:#fff;border-radius:8px 8px 0 0;font-size:10px;font-weight:700">
+      <div>Item</div><div style="text-align:center">Opening</div>
+      <div style="text-align:center">Delivered</div><div style="text-align:center">Left(CRT)</div>
+      <div style="text-align:center">Left(PCS)</div>
+    </div>
+    <div id="stk-list" style="border:1.5px solid var(--gray-2);border-top:none;border-radius:0 0 8px 8px;"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">⚠️ Low Stock Alerts</div>
+    <div id="low-stk"><div class="sm" style="text-align:center;padding:10px">All stock levels OK</div></div>
   </div>
 </div>
 
-<!-- MODAL: EDIT EXPENSE -->
-<div class="modal-overlay" id="modal-edit-expense">
-  <div class="modal">
-    <div class="modal-handle"></div>
-    <div class="modal-title">✏️ Edit Expense</div>
-    <input type="hidden" id="edit-exp-id">
-    <label>Date</label><input type="date" id="edit-exp-date">
-    <label>Category</label>
-    <select id="edit-exp-cat">
-      <option value="Fuel">⛽ Fuel</option>
-      <option value="Miscellaneous">📦 Miscellaneous</option>
-      <option value="Vehicle Repair">🔧 Vehicle Repair</option>
-      <option value="Staff Payment">👷 Staff Payment</option>
-      <option value="Phone/Recharge">📱 Phone/Recharge</option>
-      <option value="Loading/Unloading">🏋️ Loading/Unloading</option>
-      <option value="Other">🔹 Other</option>
-    </select>
-    <label>Description</label><input type="text" id="edit-exp-desc">
-    <label>Amount (₹)</label><input type="number" id="edit-exp-amt" inputmode="numeric">
-    <button class="btn btn-blue" onclick="updateExpense()">✅ Save Changes</button>
-    <button class="btn btn-red" onclick="deleteExpense()" style="margin-top:6px">🗑 Delete Expense</button>
-    <button class="btn btn-outline" onclick="closeModal('modal-edit-expense')">Cancel</button>
+<!-- PAGE: REPORT -->
+<div class="page" id="page-report">
+  <div class="card">
+    <div class="card-title">📈 Monthly Report</div>
+    <div class="chip-row">
+      <div class="chip c-red"><div class="cl">Paid to Co.</div><div class="cv" id="r-paid">₹0</div></div>
+      <div class="chip c-green"><div class="cl">Collected</div><div class="cv" id="r-coll">₹0</div></div>
+      <div class="chip c-blue"><div class="cl">Gross P&L</div><div class="cv" id="r-pl">₹0</div></div>
+      <div class="chip c-orange"><div class="cl">Collection%</div><div class="cv" id="r-pct">0%</div></div>
+    </div>
+    <div class="chip-row">
+      <div class="chip c-blue"><div class="cl">Total Cash</div><div class="cv" id="r-cash">₹0</div></div>
+      <div class="chip c-green"><div class="cl">Total Online</div><div class="cv" id="r-online">₹0</div></div>
+    </div>
+    <div id="r-exp-summary"></div>
+    <div id="r-table"></div>
+    <button class="btn btn-outline" onclick="exportDiary()" style="margin-top:8px">📋 Copy Month Data</button>
+    <button class="btn btn-orange" onclick="backupData()" style="margin-top:6px">💾 Backup All Data</button>
+    <button class="btn btn-outline" onclick="restoreBackup()" style="margin-top:6px">📥 Restore Backup</button>
   </div>
 </div>
 
-<!-- MODAL: EDIT SHOP -->
-<div class="modal-overlay" id="modal-edit-shop">
+<!-- MODALS -->
+<!-- Add Shop -->
+<div class="moverlay" id="m-addshop">
   <div class="modal">
-    <div class="modal-handle"></div>
-    <div class="modal-title">✏️ Edit Shop</div>
-    <input type="hidden" id="edit-shop-id">
-    <label>Shop Name</label><input type="text" id="edit-shop-name">
-    <label>Phone</label><input type="tel" id="edit-shop-phone" inputmode="numeric">
-    <label>Current Balance Due (₹)</label><input type="number" id="edit-shop-bal" inputmode="numeric">
+    <div class="mhandle"></div><div class="mtitle">➕ Add New Shop</div>
+    <label>Shop Name *</label><input type="text" id="ns-name" placeholder="e.g. Sharma General Store">
+    <label>Phone Number</label><input type="tel" id="ns-phone" placeholder="9876543210" inputmode="numeric">
+    <label>Opening Balance Due (₹)</label><input type="number" id="ns-bal" placeholder="0" value="0" inputmode="numeric">
+    <button class="btn btn-green" onclick="addShop()">✅ Add Shop</button>
+    <button class="btn btn-outline" onclick="closeModal('m-addshop')">Cancel</button>
+  </div>
+</div>
+<!-- Shop Detail -->
+<div class="moverlay" id="m-shopdetail">
+  <div class="modal">
+    <div class="mhandle"></div><div class="mtitle" id="m-shop-title">Shop</div>
+    <div id="m-shop-body"></div>
+    <button class="btn btn-outline" style="margin-top:10px" onclick="closeModal('m-shopdetail')">Close</button>
+  </div>
+</div>
+<!-- Edit Shop -->
+<div class="moverlay" id="m-editshop">
+  <div class="modal">
+    <div class="mhandle"></div><div class="mtitle">✏️ Edit Shop</div>
+    <input type="hidden" id="es-id">
+    <label>Shop Name</label><input type="text" id="es-name">
+    <label>Phone</label><input type="tel" id="es-phone" inputmode="numeric">
+    <label>Balance Due (₹)</label><input type="number" id="es-bal" inputmode="numeric">
     <button class="btn btn-blue" onclick="updateShop()">✅ Save Changes</button>
     <button class="btn btn-red" onclick="deleteShop()" style="margin-top:6px">🗑 Remove Shop</button>
-    <button class="btn btn-outline" onclick="closeModal('modal-edit-shop')">Cancel</button>
+    <button class="btn btn-outline" onclick="closeModal('m-editshop')">Cancel</button>
+  </div>
+</div>
+<!-- Edit Diary -->
+<div class="moverlay" id="m-editdiary">
+  <div class="modal">
+    <div class="mhandle"></div><div class="mtitle">✏️ Edit Diary Entry</div>
+    <input type="hidden" id="ed-orig">
+    <label>Date</label><input type="date" id="ed-date">
+    <label>Paid to Company (₹)</label><input type="number" id="ed-paid" inputmode="numeric">
+    <label>Collection Cash (₹)</label><input type="number" id="ed-cash" inputmode="numeric">
+    <label>Collection Online (₹)</label><input type="number" id="ed-online" inputmode="numeric">
+    <label>Invoice No.</label><input type="text" id="ed-inv">
+    <button class="btn btn-blue" onclick="updateDiary()">✅ Save Changes</button>
+    <button class="btn btn-red" onclick="deleteDiary()" style="margin-top:6px">🗑 Delete Entry</button>
+    <button class="btn btn-outline" onclick="closeModal('m-editdiary')">Cancel</button>
+  </div>
+</div>
+<!-- Edit Expense -->
+<div class="moverlay" id="m-editexp">
+  <div class="modal">
+    <div class="mhandle"></div><div class="mtitle">✏️ Edit Expense</div>
+    <input type="hidden" id="ee-id">
+    <label>Date</label><input type="date" id="ee-date">
+    <label>Category</label>
+    <select id="ee-cat">
+      <option>⛽ Fuel</option><option>📦 Miscellaneous</option>
+      <option>🔧 Vehicle Repair</option><option>👷 Staff Payment</option>
+      <option>📱 Phone/Recharge</option><option>🏋️ Loading/Unloading</option>
+      <option>🔹 Other</option>
+    </select>
+    <label>Description</label><input type="text" id="ee-desc">
+    <label>Amount (₹)</label><input type="number" id="ee-amt" inputmode="numeric">
+    <button class="btn btn-blue" onclick="updateExpense()">✅ Save Changes</button>
+    <button class="btn btn-red" onclick="deleteExpense()" style="margin-top:6px">🗑 Delete</button>
+    <button class="btn btn-outline" onclick="closeModal('m-editexp')">Cancel</button>
+  </div>
+</div>
+<!-- Manage Items -->
+<div class="moverlay" id="m-items">
+  <div class="modal">
+    <div class="mhandle"></div><div class="mtitle">📦 Manage Items & Rates</div>
+    <div style="font-size:11px;padding:7px 9px;background:var(--blue-l);border-radius:7px;color:var(--blue-d);margin-bottom:9px">Set fixed rate once — auto-fills every challan. Green = rate set. Still editable per bill.</div>
+    <div class="shdr">Add New Item</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+      <div><label>Item Name *</label><input type="text" id="ni-name" placeholder="e.g. Gud Dahi"></div>
+      <div><label>Unit</label><select id="ni-unit"><option value="CRT">CRT</option><option value="PCS">PCS</option></select></div>
+      <div><label>Pcs per CRT</label><input type="number" id="ni-pcs" placeholder="24" inputmode="numeric"></div>
+      <div><label>Fixed Rate (₹)</label><input type="number" id="ni-rate" placeholder="35" inputmode="decimal"></div>
+    </div>
+    <button class="btn btn-green" onclick="addItem()" style="margin-top:8px">➕ Add Item</button>
+    <div class="shdr">All Items</div>
+    <div id="items-list" style="max-height:260px;overflow-y:auto"></div>
+    <button class="btn btn-outline" onclick="closeModal('m-items')" style="margin-top:10px">Done</button>
+  </div>
+</div>
+<!-- Resend Bill -->
+<div class="moverlay" id="m-resend">
+  <div class="modal">
+    <div class="mhandle"></div><div class="mtitle">📋 Resend Bill</div>
+    <div id="m-resend-body"></div>
+    <button class="btn btn-outline" onclick="closeModal('m-resend')" style="margin-top:8px">Close</button>
   </div>
 </div>
 
-<div class="bottom-nav">
-  <button class="nav-btn active" onclick="showPage('home',this)"><span class="icon">📒</span>Diary</button>
-  <button class="nav-btn" onclick="showPage('order',this)"><span class="icon">📦</span>Order</button>
-  <button class="nav-btn" onclick="showPage('shops',this)"><span class="icon">🏪</span>Shops</button>
-  <button class="nav-btn" onclick="showPage('challan',this)"><span class="icon">🧾</span>Challan</button>
-  <button class="nav-btn" onclick="showPage('expense',this)"><span class="icon">💸</span>Expense</button>
-  <button class="nav-btn" onclick="showPage('report',this)"><span class="icon">📈</span>Report</button>
+<!-- BOTTOM NAV -->
+<div class="bnav">
+  <button class="nb active" onclick="showPage('home',this)"><span class="ic">📒</span>Diary</button>
+  <button class="nb" onclick="showPage('order',this)"><span class="ic">📦</span>Order</button>
+  <button class="nb" onclick="showPage('shops',this)"><span class="ic">🏪</span>Shops</button>
+  <button class="nb" onclick="showPage('challan',this)"><span class="ic">🧾</span>Challan</button>
+  <button class="nb" onclick="showPage('expense',this)"><span class="ic">💸</span>Expense</button>
+  <button class="nb" onclick="showPage('stock',this)"><span class="ic">📊</span>Stock</button>
+  <button class="nb" onclick="showPage('report',this)"><span class="ic">📈</span>Report</button>
 </div>
 <div class="toast" id="toast"></div>
 
+<!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <script>
-// ══════════════════════════════════════════
-// SKU MASTER — exact specs from user
-// unit: CRT or PCS
-// pcsPerCrt: pieces in 1 crate (1 for PCS items)
-// ══════════════════════════════════════════
-const DEFAULT_SKUS = [
-  {name:"FCM 1000ml",        unit:"CRT", pcs:12,  rate:61.60},
-  {name:"FCM 500/550ml",     unit:"CRT", pcs:24,  rate:31.26},
-  {name:"Std 1000ml",        unit:"CRT", pcs:12,  rate:53.60},
-  {name:"Std 500ml",         unit:"CRT", pcs:24,  rate:27.25},
-  {name:"Cow 1000ml",        unit:"CRT", pcs:12,  rate:50.60},
-  {name:"Cow 500ml",         unit:"CRT", pcs:24,  rate:26.25},
-  {name:"Cow 6 Ltr",         unit:"CRT", pcs:2,   rate:0},
-  {name:"Shakti 6 Ltr",      unit:"CRT", pcs:2,   rate:0},
-  {name:"160ml Milk",        unit:"CRT", pcs:60,  rate:0},
-  {name:"Dahi 80gm",         unit:"CRT", pcs:24,  rate:0},
-  {name:"Mitha Dahi",        unit:"CRT", pcs:24,  rate:0},
-  {name:"Dahi 200gm",        unit:"CRT", pcs:12,  rate:0},
-  {name:"Dahi Cup 200g",     unit:"CRT", pcs:12,  rate:0},
-  {name:"Dahi Cup 400g",     unit:"CRT", pcs:6,   rate:0},
-  {name:"Pouch Dahi 110g",   unit:"CRT", pcs:70,  rate:0},
-  {name:"Pouch Dahi 400g",   unit:"CRT", pcs:30,  rate:0},
-  {name:"Pouch Dahi 1kg",    unit:"CRT", pcs:12,  rate:0},
-  {name:"Dahi 5kg",          unit:"CRT", pcs:4,   rate:0},
-  {name:"Lassi 130ml",       unit:"CRT", pcs:60,  rate:0},
-  {name:"Kesar Lassi",       unit:"CRT", pcs:60,  rate:0},
-  {name:"Mango Lassi",       unit:"CRT", pcs:60,  rate:0},
-  {name:"Chach 260ml",       unit:"CRT", pcs:30,  rate:0},
-  {name:"Gud Dahi",          unit:"CRT", pcs:24,  rate:0},
-  {name:"Paneer 200g",       unit:"PCS", pcs:1,   rate:0},
-  {name:"Paneer 100g",       unit:"PCS", pcs:1,   rate:0},
+// ══ SKUS ══
+const DEFAULT_SKUS=[
+  {name:"FCM 1000ml",unit:"CRT",pcs:12,rate:61.60},
+  {name:"FCM 500/550ml",unit:"CRT",pcs:24,rate:31.26},
+  {name:"Std 1000ml",unit:"CRT",pcs:12,rate:53.60},
+  {name:"Std 500ml",unit:"CRT",pcs:24,rate:27.25},
+  {name:"Cow 1000ml",unit:"CRT",pcs:12,rate:50.60},
+  {name:"Cow 500ml",unit:"CRT",pcs:24,rate:26.25},
+  {name:"Cow 6 Ltr",unit:"CRT",pcs:2,rate:0},
+  {name:"Shakti 6 Ltr",unit:"CRT",pcs:2,rate:0},
+  {name:"160ml Milk",unit:"CRT",pcs:60,rate:0},
+  {name:"Dahi 80gm",unit:"CRT",pcs:24,rate:0},
+  {name:"Mitha Dahi",unit:"CRT",pcs:24,rate:0},
+  {name:"Dahi 200gm",unit:"CRT",pcs:12,rate:0},
+  {name:"Dahi Cup 200g",unit:"CRT",pcs:12,rate:0},
+  {name:"Dahi Cup 400g",unit:"CRT",pcs:6,rate:0},
+  {name:"Pouch Dahi 110g",unit:"CRT",pcs:70,rate:0},
+  {name:"Pouch Dahi 400g",unit:"CRT",pcs:30,rate:0},
+  {name:"Pouch Dahi 1kg",unit:"CRT",pcs:12,rate:0},
+  {name:"Dahi 5kg",unit:"CRT",pcs:4,rate:0},
+  {name:"Lassi 130ml",unit:"CRT",pcs:60,rate:0},
+  {name:"Kesar Lassi",unit:"CRT",pcs:60,rate:0},
+  {name:"Mango Lassi",unit:"CRT",pcs:60,rate:0},
+  {name:"Chach 260ml",unit:"CRT",pcs:30,rate:0},
+  {name:"Gud Dahi",unit:"CRT",pcs:24,rate:0},
+  {name:"Paneer 200g",unit:"PCS",pcs:1,rate:0},
+  {name:"Paneer 100g",unit:"PCS",pcs:1,rate:0},
 ];
-// SKUS is dynamic — loaded from DB or defaults
-let SKUS = [...DEFAULT_SKUS];
+let SKUS=[...DEFAULT_SKUS];
 
-let DB = {shops:[], diary:[], orders:[], stock:{}, expenses:[], skus:null, rates:{}, nextShopId:1, nextExpId:1};
+// ══ DB ══
+let DB={shops:[],diary:[],orders:[],stock:{},expenses:[],skus:null,rates:{},nextShopId:1,nextExpId:1,nextBillId:1};
 
-// ── FIREBASE CONFIG ──
-const firebaseConfig = {
-  apiKey: "AIzaSyCi6P3vSgU9SVZMzDIWyQjJQY8FeO3kifs",
-  authDomain: "aayudhi-enterprises.firebaseapp.com",
-  databaseURL: "https://aayudhi-enterprises-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "aayudhi-enterprises",
-  storageBucket: "aayudhi-enterprises.firebasestorage.app",
-  messagingSenderId: "872030424715",
-  appId: "1:872030424715:web:e9ff5e6c27a01d0a8c4e8e"
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
-const dbRef = db.ref('aayudhi/data');
+// ══ FIREBASE ══
+firebase.initializeApp({
+  apiKey:"AIzaSyCi6P3vSgU9SVZMzDIWyQjJQY8FeO3kifs",
+  authDomain:"aayudhi-enterprises.firebaseapp.com",
+  databaseURL:"https://aayudhi-enterprises-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId:"aayudhi-enterprises",
+  storageBucket:"aayudhi-enterprises.firebasestorage.app",
+  messagingSenderId:"872030424715",
+  appId:"1:872030424715:web:e9ff5e6c27a01d0a8c4e8e"
+});
+const fbdb=firebase.database();
+const dbRef=fbdb.ref('aayudhi/data');
+let _saveTimer=null;
+let _isRemoteUpdate=false;
+let _currentUser=localStorage.getItem('aayudhi_user')||'Owner';
 
-let _isSyncing = false;
-let _saveTimer = null;
-let _currentUser = localStorage.getItem('aayudhi_user') || 'Owner';
-
-function setUser(val){
-  _currentUser = val;
-  localStorage.setItem('aayudhi_user', val);
+function syncStatus(state){
+  const dot=document.getElementById('sync-dot');
+  const lbl=document.getElementById('sync-lbl');
+  if(!dot||!lbl)return;
+  const map={connected:['#4CAF50','Synced'],saving:['#F9A825','Saving...'],offline:['#F44336','Offline'],connecting:['#9E9E9E','Connecting...']};
+  const [col,txt]=map[state]||map.connecting;
+  dot.style.background=col; lbl.textContent=txt;
 }
 
-function setSyncStatus(state){
-  const dot = document.getElementById('sync-dot');
-  const lbl = document.getElementById('sync-label');
-  if(!dot||!lbl) return;
-  if(state==='connected'){
-    dot.style.background='#4CAF50'; lbl.textContent='Synced';
-  } else if(state==='saving'){
-    dot.style.background='#F9A825'; lbl.textContent='Saving...';
-  } else if(state==='offline'){
-    dot.style.background='#F44336'; lbl.textContent='Offline';
-  } else {
-    dot.style.background='#999'; lbl.textContent='Connecting...';
-  }
-}
-
-function applyDBData(data){
-  if(!data) return;
-  DB = data;
-  if(!DB.rates) DB.rates={};
-  if(!DB.expenses) DB.expenses=[];
-  if(!DB.nextExpId) DB.nextExpId=1;
-  if(!DB.nextBillId) DB.nextBillId=1;
-  if(!DB.nextShopId) DB.nextShopId=1;
-  if(DB.skus && DB.skus.length) SKUS=[...DB.skus];
-  if(DB.rates) SKUS.forEach(s=>{ if(DB.rates[s.name]!==undefined) s.rate=DB.rates[s.name]; });
-  // Save to localStorage as offline cache
-  try{ localStorage.setItem('aayudhi_v3', JSON.stringify(DB)); }catch(e){}
+function applyData(data){
+  if(!data)return;
+  DB=data;
+  if(!DB.rates)DB.rates={};
+  if(!DB.expenses)DB.expenses=[];
+  if(!DB.nextExpId)DB.nextExpId=1;
+  if(!DB.nextBillId)DB.nextBillId=1;
+  if(!DB.nextShopId)DB.nextShopId=1;
+  if(!DB.stock)DB.stock={};
+  if(DB.skus&&DB.skus.length)SKUS=[...DB.skus];
+  if(DB.rates)SKUS.forEach(s=>{if(DB.rates[s.name]!==undefined)s.rate=DB.rates[s.name];});
+  try{localStorage.setItem('aayudhi_v4',JSON.stringify(DB));}catch(e){}
 }
 
 function saveDB(){
-  // Save to localStorage immediately (offline cache)
-  try{ localStorage.setItem('aayudhi_v3', JSON.stringify(DB)); }catch(e){}
-  // Debounce Firebase write — 600ms
+  try{localStorage.setItem('aayudhi_v4',JSON.stringify(DB));}catch(e){}
   clearTimeout(_saveTimer);
-  _saveTimer = setTimeout(()=>{
-    setSyncStatus('saving');
-    dbRef.set(DB)
-      .then(()=>setSyncStatus('connected'))
-      .catch(()=>setSyncStatus('offline'));
-  }, 600);
+  _saveTimer=setTimeout(()=>{
+    syncStatus('saving');
+    dbRef.set(DB).then(()=>syncStatus('connected')).catch(()=>syncStatus('offline'));
+  },600);
 }
 
-function loadDB(){
-  // Load from localStorage first (instant, offline fallback)
+function setUser(v){_currentUser=v;localStorage.setItem('aayudhi_user',v);}
+
+// ══ INIT FIREBASE ══
+function initFirebase(){
+  // Load localStorage first (instant)
   try{
-    const d=localStorage.getItem('aayudhi_v3');
-    if(d){
-      const parsed=JSON.parse(d);
-      applyDBData(parsed);
-    }
+    const d=localStorage.getItem('aayudhi_v4');
+    if(d)applyData(JSON.parse(d));
   }catch(e){}
-  // Then connect to Firebase for live sync
-  db.ref('.info/connected').on('value', snap=>{
-    if(snap.val()===true){
-      setSyncStatus('connected');
-    } else {
-      setSyncStatus('offline');
-    }
+  // Connection status
+  fbdb.ref('.info/connected').on('value',snap=>{
+    syncStatus(snap.val()?'connected':'offline');
   });
-  // Real-time listener — updates all connected phones instantly
-  dbRef.on('value', snap=>{
-    const data = snap.val();
-    if(!data) return;
-    // Only apply if data is newer than local (avoid overwriting own just-saved data)
-    applyDBData(data);
-    setSyncStatus('connected');
-    // Refresh current visible page
-    const activePage = document.querySelector('.page.active');
-    if(activePage){
-      const id = activePage.id.replace('page-','');
-      if(id==='home')   { renderDiary(); updateDashboard(); }
-      if(id==='shops')  renderShops();
-      if(id==='report') renderReport();
-      if(id==='expense') renderExpenses();
-      if(id==='stock')  renderStock();
+  // Real-time listener
+  dbRef.on('value',snap=>{
+    const data=snap.val();
+    if(!data)return;
+    _isRemoteUpdate=true;
+    applyData(data);
+    syncStatus('connected');
+    // Refresh active page
+    const ap=document.querySelector('.page.active');
+    if(ap){
+      const id=ap.id.replace('page-','');
+      if(id==='home'){renderDiary();updateDashboard();}
+      else if(id==='shops'){renderShops();updateShopSelects();}
+      else if(id==='report')renderReport();
+      else if(id==='expense')renderExpenses();
+      else if(id==='stock')renderStock();
     }
+    _isRemoteUpdate=false;
   });
 }
-function fmt(n){ return '₹'+(n||0).toLocaleString('en-IN',{maximumFractionDigits:0}); }
-function todayStr(){ return new Date().toISOString().split('T')[0]; }
-function fmtDate(d){ if(!d) return ''; return new Date(d+'T00:00:00').toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'2-digit'}); }
-function showToast(m){ const t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2500); }
-function closeModal(id){ document.getElementById(id).classList.remove('open'); }
-document.querySelectorAll('.modal-overlay').forEach(m=>m.addEventListener('click',e=>{ if(e.target===m) m.classList.remove('open'); }));
 
-// ── NAV ──
-function showPage(id, btn){
+// ══ HELPERS ══
+const fmt=n=>'₹'+(n||0).toLocaleString('en-IN',{maximumFractionDigits:0});
+const today=()=>new Date().toISOString().split('T')[0];
+const fmtD=d=>{if(!d)return'';return new Date(d+'T00:00:00').toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'2-digit'});};
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+document.querySelectorAll('.moverlay').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open');}));
+
+function copyTxt(txt){
+  navigator.clipboard.writeText(txt).catch(()=>{
+    const ta=document.createElement('textarea');
+    ta.value=txt;document.body.appendChild(ta);ta.select();
+    document.execCommand('copy');document.body.removeChild(ta);
+  });
+}
+function openWA(phone,txt){
+  const p=(phone||'').replace(/\D/g,'');
+  const url=p.length>=10?`https://wa.me/91${p.slice(-10)}?text=${encodeURIComponent(txt)}`:`https://wa.me/?text=${encodeURIComponent(txt)}`;
+  window.open(url,'_blank');
+}
+
+// ══ NAV ══
+function showPage(id,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
-  if(btn) btn.classList.add('active');
-  if(id==='home')   { renderDiary(); updateDashboard(); }
-  if(id==='order')  { buildOrderTable(); loadOrderForDate(); }
-  if(id==='shops')  { renderShops(); updateShopSelects(); }
-  if(id==='challan'){ updateShopSelects(); buildChallanTable(); }
-  if(id==='stock')  renderStock();
-  if(id==='expense') renderExpenses();
-  if(id==='report') renderReport();
+  if(btn)btn.classList.add('active');
+  if(id==='home'){renderDiary();updateDashboard();}
+  if(id==='order'){buildOrderList();loadOrderDate();}
+  if(id==='shops'){renderShops();updateShopSelects();}
+  if(id==='challan'){updateShopSelects();buildChallanList();}
+  if(id==='expense')renderExpenses();
+  if(id==='stock')renderStock();
+  if(id==='report')renderReport();
 }
 
-// ── DIARY ──
+// ══ DASHBOARD ══
 function updateDashboard(){
-  const today=document.getElementById('diary-date').value||todayStr();
-  const de=DB.diary.find(d=>d.date===today);
-  document.getElementById('d-paid').textContent  = de?fmt(de.paid):'₹0';
-  document.getElementById('d-coll').textContent  = de?fmt(de.cash+de.online):'₹0';
-  document.getElementById('d-cash').textContent  = de?fmt(de.cash):'₹0';
-  document.getElementById('d-online').textContent= de?fmt(de.online):'₹0';
-  document.getElementById('topDate').textContent = new Date().toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
+  const t=today();
+  const de=DB.diary.find(d=>d.date===t);
+  document.getElementById('d-paid').textContent=de?fmt(de.paid):'₹0';
+  document.getElementById('d-coll').textContent=de?fmt(de.cash+de.online):'₹0';
+  document.getElementById('d-cash').textContent=de?fmt(de.cash):'₹0';
+  document.getElementById('d-online').textContent=de?fmt(de.online):'₹0';
+  document.getElementById('topDate')&&(document.getElementById('topDate').textContent=new Date().toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}));
 }
 
+// live preview
 ['diary-cash','diary-online','diary-paid'].forEach(id=>{
-  document.getElementById(id).addEventListener('input',()=>{
+  const el=document.getElementById(id);
+  if(el)el.addEventListener('input',()=>{
     const c=parseFloat(document.getElementById('diary-cash').value)||0;
     const o=parseFloat(document.getElementById('diary-online').value)||0;
     const p=parseFloat(document.getElementById('diary-paid').value)||0;
-    const tot=c+o; const pl=tot-p;
-    document.getElementById('d-tot-prev').textContent=fmt(tot);
-    const el=document.getElementById('d-pl-prev');
-    el.textContent=(pl>=0?'+':'')+fmt(pl);
-    el.style.color=pl>=0?'var(--green)':'var(--red)';
+    const tot=c+o;const pl=tot-p;
+    document.getElementById('d-tot').textContent=fmt(tot);
+    const plEl=document.getElementById('d-pl');
+    plEl.textContent=(pl>=0?'+':'')+fmt(pl);
+    plEl.style.color=pl>=0?'var(--green)':'var(--red)';
   });
 });
 
+// ══ DIARY ══
 function saveDiary(){
   const date=document.getElementById('diary-date').value;
   const paid=parseFloat(document.getElementById('diary-paid').value)||0;
@@ -639,899 +621,586 @@ function saveDiary(){
   if(!date||!paid){showToast('Enter date and amount paid');return;}
   const idx=DB.diary.findIndex(d=>d.date===date);
   const e={date,paid,cash,online,inv};
-  if(idx>=0) DB.diary[idx]=e; else DB.diary.push(e);
+  if(idx>=0)DB.diary[idx]=e;else DB.diary.push(e);
   DB.diary.sort((a,b)=>b.date.localeCompare(a.date));
-  saveDB(); renderDiary(); updateDashboard();
-  showToast('✅ Diary saved');
+  saveDB();renderDiary();updateDashboard();
   ['diary-paid','diary-cash','diary-online','diary-inv'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('d-tot-prev').textContent='₹0';
-  document.getElementById('d-pl-prev').textContent='₹0';
+  document.getElementById('d-tot').textContent='₹0';
+  document.getElementById('d-pl').textContent='₹0';
+  showToast('✅ Diary saved');
 }
 
 function renderDiary(){
   const el=document.getElementById('diary-list');
-  if(!DB.diary.length){el.innerHTML='<div class="small" style="text-align:center;padding:10px">No entries yet</div>';return;}
-  el.innerHTML=DB.diary.slice(0,15).map(d=>{
-    const tot=d.cash+d.online; const pl=tot-d.paid;
-    return `<div style="padding:9px 0;border-bottom:1px solid var(--gray-2)">
+  if(!DB.diary.length){el.innerHTML='<div class="sm" style="text-align:center;padding:10px">No entries yet</div>';return;}
+  el.innerHTML=DB.diary.slice(0,20).map(d=>{
+    const tot=d.cash+d.online;const pl=tot-d.paid;
+    return `<div style="padding:8px 0;border-bottom:1px solid var(--gray-2)">
       <div style="display:flex;justify-content:space-between;align-items:center">
-        <span class="bold">${fmtDate(d.date)}</span>
-        <div style="display:flex;align-items:center;gap:8px">
-          <span class="bold ${pl>=0?'green-text':'red-text'}">${pl>=0?'+':''}${fmt(pl)}</span>
-          <button onclick="openEditDiary('${d.date}')" style="border:none;background:var(--blue-l);color:var(--blue);border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700;cursor:pointer">✏️ Edit</button>
+        <span class="bold">${fmtD(d.date)}</span>
+        <div style="display:flex;align-items:center;gap:7px">
+          <span class="bold ${pl>=0?'gt':'rt'}">${pl>=0?'+':''}${fmt(pl)}</span>
+          <button onclick="openEditDiary('${d.date}')" style="border:none;background:var(--blue-l);color:var(--blue);border-radius:5px;padding:2px 7px;font-size:11px;font-weight:700;cursor:pointer">✏️</button>
         </div>
       </div>
-      <div style="display:flex;gap:10px;margin-top:3px;font-size:12px;flex-wrap:wrap">
-        <span class="red-text">Paid:${fmt(d.paid)}</span>
-        <span class="green-text">Cash:${fmt(d.cash)}</span>
-        <span class="blue-text">Online:${fmt(d.online)}</span>
-        ${d.inv?`<span class="small">${d.inv}</span>`:''}
+      <div style="display:flex;gap:9px;margin-top:3px;font-size:11px;flex-wrap:wrap">
+        <span class="rt">Paid:${fmt(d.paid)}</span>
+        <span class="gt">Cash:${fmt(d.cash)}</span>
+        <span class="bt">Online:${fmt(d.online)}</span>
+        ${d.inv?`<span class="sm">${d.inv}</span>`:''}
       </div>
     </div>`;
   }).join('');
 }
 
-// ── ORDER PAGE ──
-function buildOrderTable(){
-  const tbody=document.getElementById('order-tbody');
-  tbody.innerHTML=SKUS.map((s,i)=>`
-    <tr id="orow-${i}">
-      <td><div style="font-weight:600;font-size:13px">${s.name}</div>
-          <div class="small">${s.unit==='PCS'?'Per Piece':'1 CRT = '+s.pcs+' pcs'}</div></td>
-      <td style="text-align:center;font-size:12px">${s.unit}</td>
-      <td style="text-align:center;font-size:12px">${s.unit==='PCS'?'—':s.pcs}</td>
-      <td style="text-align:center">
-        <input class="qty-inp" type="number" id="oq-${i}" min="0" placeholder="0"
-               inputmode="numeric" oninput="updateOrderTotal()">
-      </td>
-      <td style="text-align:center;font-weight:700;font-size:13px" id="opcs-${i}">—</td>
-    </tr>`).join('');
+function openEditDiary(date){
+  const d=DB.diary.find(e=>e.date===date);if(!d)return;
+  document.getElementById('ed-orig').value=date;
+  document.getElementById('ed-date').value=d.date;
+  document.getElementById('ed-paid').value=d.paid;
+  document.getElementById('ed-cash').value=d.cash;
+  document.getElementById('ed-online').value=d.online;
+  document.getElementById('ed-inv').value=d.inv||'';
+  openModal('m-editdiary');
+}
+function updateDiary(){
+  const orig=document.getElementById('ed-orig').value;
+  const idx=DB.diary.findIndex(d=>d.date===orig);if(idx<0)return;
+  DB.diary[idx]={date:document.getElementById('ed-date').value,paid:parseFloat(document.getElementById('ed-paid').value)||0,cash:parseFloat(document.getElementById('ed-cash').value)||0,online:parseFloat(document.getElementById('ed-online').value)||0,inv:document.getElementById('ed-inv').value};
+  DB.diary.sort((a,b)=>b.date.localeCompare(a.date));
+  saveDB();closeModal('m-editdiary');renderDiary();updateDashboard();showToast('✅ Updated');
+}
+function deleteDiary(){
+  if(!confirm('Delete this entry?'))return;
+  DB.diary=DB.diary.filter(d=>d.date!==document.getElementById('ed-orig').value);
+  saveDB();closeModal('m-editdiary');renderDiary();updateDashboard();showToast('🗑 Deleted');
 }
 
-function loadOrderForDate(){
-  const date=document.getElementById('order-date').value||todayStr();
-  const order=DB.orders.find(o=>o.date===date);
-  if(order){
-    SKUS.forEach((_,i)=>{const el=document.getElementById(`oq-${i}`);if(el)el.value=order.items[i]||'';});
-    document.getElementById('order-paid').value=order.paid||'';
-  }
+// ══ ORDER ══
+function buildOrderList(){
+  const el=document.getElementById('order-list');
+  el.innerHTML=SKUS.map((s,i)=>`
+    <div style="display:grid;grid-template-columns:1fr 52px 52px 62px;gap:4px;align-items:center;padding:5px 0;border-bottom:1px solid var(--gray-2)">
+      <div><div style="font-weight:600;font-size:12px">${s.name}</div>
+        <div class="sm">${s.unit==='PCS'?'Per PCS':'1 CRT='+s.pcs+' pcs'}</div></div>
+      <div style="text-align:center;font-size:11px">${s.unit}</div>
+      <input class="qi" type="number" id="oq-${i}" min="0" placeholder="0" inputmode="numeric" oninput="updateOrderTotal()">
+      <div style="text-align:center;font-weight:700;font-size:11px;color:var(--blue-d)" id="ops-${i}">—</div>
+    </div>`).join('');
+}
+function loadOrderDate(){
+  const date=document.getElementById('order-date').value||today();
+  const o=DB.orders.find(x=>x.date===date);
+  if(o){SKUS.forEach((_,i)=>{const el=document.getElementById(`oq-${i}`);if(el)el.value=o.items[i]||'';});
+    document.getElementById('order-paid').value=o.paid||'';}
   updateOrderTotal();
 }
-
 function updateOrderTotal(){
-  let totalCrt=0, totalPcs=0;
+  let tot=0,pcs=0;
   SKUS.forEach((s,i)=>{
-    const qty=parseFloat(document.getElementById(`oq-${i}`)?.value)||0;
-    const pcs=s.unit==='PCS'?qty:qty*s.pcs;
-    totalCrt+=qty; totalPcs+=pcs;
-    const el=document.getElementById(`opcs-${i}`);
-    if(el) el.textContent=qty>0?(s.unit==='PCS'?qty+' pcs':pcs+' pcs'):'—';
+    const q=parseFloat(document.getElementById(`oq-${i}`)?.value)||0;
+    const p=s.unit==='PCS'?q:q*s.pcs;
+    tot+=q;pcs+=p;
+    const el=document.getElementById(`ops-${i}`);
+    if(el)el.textContent=q>0?(s.unit==='PCS'?q+' pcs':p+' pcs'):'—';
   });
-  document.getElementById('order-total-crt').textContent=totalCrt;
-  document.getElementById('order-total-pcs').textContent=totalPcs+' pcs';
+  document.getElementById('o-total').textContent=tot+' ('+pcs+' pcs)';
 }
-
-function clearOrder(){
-  SKUS.forEach((_,i)=>{const el=document.getElementById(`oq-${i}`);if(el)el.value='';});
-  document.getElementById('order-paid').value='';
-  updateOrderTotal();
-}
-
+function clearOrder(){SKUS.forEach((_,i)=>{const el=document.getElementById(`oq-${i}`);if(el)el.value='';});document.getElementById('order-paid').value='';updateOrderTotal();}
 function saveOrder(){
-  const date=document.getElementById('order-date').value||todayStr();
+  const date=document.getElementById('order-date').value||today();
   const paid=parseFloat(document.getElementById('order-paid').value)||0;
-  if(!paid){showToast('Enter amount paid to company');return;}
+  if(!paid){showToast('Enter amount paid');return;}
   const items=SKUS.map((_,i)=>parseFloat(document.getElementById(`oq-${i}`)?.value)||0);
   const idx=DB.orders.findIndex(o=>o.date===date);
-  if(idx>=0) DB.orders[idx]={date,paid,items}; else DB.orders.push({date,paid,items});
-  // Update opening stock from order
-  SKUS.forEach((s,i)=>{
-    const qty=items[i]||0;
-    if(!DB.stock[i]) DB.stock[i]={opening:0,delivered:0};
-    DB.stock[i].opening=qty;
-    DB.stock[i].delivered=0;
-  });
+  if(idx>=0)DB.orders[idx]={date,paid,items};else DB.orders.push({date,paid,items});
+  SKUS.forEach((_,i)=>{if(!DB.stock[i])DB.stock[i]={opening:0,delivered:0};DB.stock[i].opening=items[i];DB.stock[i].delivered=0;});
   document.getElementById('diary-date').value=date;
   document.getElementById('diary-paid').value=paid;
-  saveDB(); showToast('✅ Order saved + stock updated');
+  saveDB();showToast('✅ Order saved + stock updated');
 }
-
-function copyOrderSummary(){
-  const date=document.getElementById('order-date').value||todayStr();
-  const lines=SKUS.map((s,i)=>{
-    const qty=parseFloat(document.getElementById(`oq-${i}`)?.value)||0;
-    return qty>0?`${s.name}: ${qty} ${s.unit} (${s.unit==='PCS'?qty:qty*s.pcs} pcs)`:'';
-  }).filter(Boolean).join('\n');
+function copyOrder(){
+  const date=document.getElementById('order-date').value||today();
+  const lines=SKUS.map((s,i)=>{const q=parseFloat(document.getElementById(`oq-${i}`)?.value)||0;return q>0?`${s.name}: ${q} ${s.unit} (${s.unit==='PCS'?q:q*s.pcs} pcs)`:'';}).filter(Boolean).join('\n');
   if(!lines){showToast('No items entered');return;}
-  navigator.clipboard.writeText(`📦 Aayudhi Enterprises\nDate: ${fmtDate(date)}\n\n${lines}`).then(()=>showToast('✅ Copied!'));
+  copyTxt(`📦 Aayudhi Enterprises\nDate: ${fmtD(date)}\n\n${lines}`);
+  showToast('✅ Copied');
 }
 
-// ── SHOPS ──
-function openAddShop(){ document.getElementById('modal-addshop').classList.add('open'); }
-
+// ══ SHOPS ══
 function addShop(){
   const name=document.getElementById('ns-name').value.trim();
   const phone=document.getElementById('ns-phone').value.trim();
   const bal=parseFloat(document.getElementById('ns-bal').value)||0;
   if(!name){showToast('Enter shop name');return;}
   DB.shops.push({id:DB.nextShopId++,name,phone,balance:bal,transactions:[]});
-  saveDB(); closeModal('modal-addshop'); renderShops(); updateShopSelects();
+  saveDB();closeModal('m-addshop');renderShops();updateShopSelects();
   ['ns-name','ns-phone'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('ns-bal').value='0';
   showToast('✅ Shop added');
 }
-
 function renderShops(){
   const search=(document.getElementById('shop-search').value||'').toLowerCase();
-  const shops=DB.shops.filter(s=>s.name.toLowerCase().includes(search)||s.phone.includes(search));
-  document.getElementById('shops-count').textContent=DB.shops.length;
-  document.getElementById('shops-total-out').textContent=fmt(DB.shops.reduce((s,sh)=>s+Math.max(0,sh.balance),0));
+  const shops=DB.shops.filter(s=>s.name.toLowerCase().includes(search)||(s.phone||'').includes(search));
+  document.getElementById('s-count').textContent=DB.shops.length;
+  document.getElementById('s-total').textContent=fmt(DB.shops.reduce((s,sh)=>s+Math.max(0,sh.balance),0));
   const el=document.getElementById('shop-list');
-  if(!shops.length){el.innerHTML='<div class="small" style="text-align:center;padding:14px">No shops</div>';return;}
+  if(!shops.length){el.innerHTML='<div class="sm" style="text-align:center;padding:12px">No shops found</div>';return;}
   el.innerHTML=shops.sort((a,b)=>b.balance-a.balance).map(s=>{
-    const todayPaid=(s.transactions||[]).filter(t=>t.date===todayStr()).reduce((sum,t)=>sum+(t.collected||0),0);
-    // Calculate days since last delivery
+    const todayPaid=(s.transactions||[]).filter(t=>t.date===today()).reduce((sum,t)=>sum+(t.collected||0),0);
     const deliveries=(s.transactions||[]).filter(t=>t.type==='delivery');
-    let agingLabel=''; let agingColor='var(--gray-3)';
-    if(deliveries.length && s.balance>0){
-      const lastDel=deliveries[deliveries.length-1];
-      const days=Math.floor((new Date()-new Date(lastDel.date+'T00:00:00'))/(1000*60*60*24));
-      if(days===0) agingLabel='today';
-      else if(days===1) agingLabel='1 day';
-      else agingLabel=days+' days';
-      if(days>=3) agingColor='var(--red)';
-      else if(days>=2) agingColor='var(--orange)';
-      else agingColor='var(--green)';
+    let aging='';let agCol='var(--gray-3)';
+    if(deliveries.length&&s.balance>0){
+      const days=Math.floor((new Date()-new Date(deliveries[deliveries.length-1].date+'T00:00:00'))/(864e5));
+      aging=days===0?'today':days+'d overdue';
+      agCol=days>=3?'var(--red)':days>=2?'var(--orange)':'var(--green)';
     }
-    const dotColor=s.balance<=0?'var(--green)':agingLabel&&parseInt(agingLabel)>=3?'var(--red)':'var(--yellow)';
-    return `<div class="shop-row" onclick="showShopDetail(${s.id})" style="${s.balance>0&&agingLabel&&parseInt(agingLabel)>=3?'background:var(--red-l)':''}">
+    const dotCol=s.balance<=0?'var(--green)':aging&&parseInt(aging)>=3?'var(--red)':'var(--yellow)';
+    return `<div class="srow" onclick="showShopDetail(${s.id})" style="${s.balance>0&&parseInt(aging)>=3?'background:var(--red-l)':''}">
       <div>
         <div style="display:flex;align-items:center">
-          <div style="width:8px;height:8px;border-radius:50%;margin-right:6px;flex-shrink:0;background:${dotColor}"></div>
-          <span class="bold" style="font-size:13px">${s.name}</span>
+          <div style="width:7px;height:7px;border-radius:50%;margin-right:6px;background:${dotCol};flex-shrink:0"></div>
+          <span class="bold" style="font-size:12px">${s.name}</span>
         </div>
-        <div style="padding-left:14px;display:flex;gap:6px;align-items:center">
-          <span class="small">${s.phone||'—'}</span>
-          ${agingLabel?`<span style="font-size:10px;font-weight:700;color:${agingColor}">${agingLabel} overdue</span>`:''}
+        <div style="padding-left:13px;display:flex;gap:5px">
+          <span class="sm">${s.phone||'—'}</span>
+          ${aging?`<span style="font-size:10px;font-weight:700;color:${agCol}">${aging}</span>`:''}
         </div>
       </div>
-      <div style="text-align:center;font-size:13px;font-weight:700">${fmt(s.balance+(todayPaid>0?todayPaid:0))}</div>
-      <div style="text-align:center;font-size:13px;font-weight:700;color:var(--green)">${todayPaid>0?fmt(todayPaid):'—'}</div>
-      <div style="text-align:center;font-size:14px;font-weight:800;color:${s.balance<=0?'var(--green)':'var(--red)'}">${fmt(s.balance)}</div>
+      <div style="text-align:center;font-size:12px;font-weight:700">${fmt(s.balance)}</div>
+      <div style="text-align:center;font-size:12px;font-weight:700;color:var(--green)">${todayPaid>0?fmt(todayPaid):'—'}</div>
+      <div style="text-align:center;font-size:13px;font-weight:800;color:${s.balance<=0?'var(--green)':'var(--red)'}">${fmt(s.balance)}</div>
     </div>`;
   }).join('');
 }
-
 function showShopDetail(id){
-  const s=DB.shops.find(sh=>sh.id===id);
-  if(!s) return;
-  document.getElementById('modal-shop-title').textContent=s.name;
-  const recent=(s.transactions||[]).slice(-5).reverse();
-  document.getElementById('modal-shop-content').innerHTML=`
-    <div class="chip chip-${s.balance<=0?'green':'orange'}" style="margin-bottom:10px">
-      <div class="chip-label">Balance Due</div><div class="chip-val">${fmt(s.balance)}</div>
+  const s=DB.shops.find(sh=>sh.id===id);if(!s)return;
+  document.getElementById('m-shop-title').textContent=s.name;
+  const bills=(s.transactions||[]).filter(t=>t.type==='delivery').slice().reverse();
+  const colls=(s.transactions||[]).filter(t=>t.type==='collection').slice().reverse().slice(0,5);
+  document.getElementById('m-shop-body').innerHTML=`
+    <div class="chip c-${s.balance<=0?'green':'orange'}" style="margin-bottom:9px">
+      <div class="cl">Balance Due</div><div class="cv">${fmt(s.balance)}</div>
     </div>
-    <div class="small" style="margin-bottom:8px"><b>Phone:</b> ${s.phone||'—'}</div>
-    <button onclick="openEditShop(${id});closeModal('modal-shopdetail')" style="border:none;background:var(--blue-l);color:var(--blue);border-radius:8px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;width:100%;margin-bottom:10px">✏️ Edit / Remove Shop</button>
-    <div class="section-hdr">Collect Payment</div>
+    <div class="sm" style="margin-bottom:8px"><b>Phone:</b> ${s.phone||'—'}</div>
+    <button onclick="openEditShopModal(${id});closeModal('m-shopdetail')" style="border:none;background:var(--blue-l);color:var(--blue);border-radius:7px;padding:6px 12px;font-size:11px;font-weight:700;cursor:pointer;width:100%;margin-bottom:9px">✏️ Edit / Remove Shop</button>
+    <div class="shdr">Collect Payment</div>
     <label>Cash (₹)</label><input type="number" id="qc-cash" placeholder="0" inputmode="numeric">
     <label>Online/UPI (₹)</label><input type="number" id="qc-online" placeholder="0" inputmode="numeric">
-    <button class="btn btn-green" onclick="quickCollect(${id})" style="margin-top:8px">💰 Record Collection</button>
-    <div class="section-hdr">Bill History</div>
-    ${(s.transactions||[]).filter(t=>t.type==='delivery').slice().reverse().map((t,idx,arr)=>{
-      const origIdx=(s.transactions||[]).indexOf(t);
-      return `<div style="background:var(--gray-1);border-radius:8px;padding:8px 10px;margin-bottom:6px">
+    <button class="btn btn-green" onclick="quickCollect(${id})" style="margin-top:7px">💰 Record Collection</button>
+    <div class="shdr">Bill History</div>
+    ${bills.length?bills.map((t,_,arr)=>{const idx=(s.transactions||[]).indexOf(t);
+      return `<div style="background:var(--gray-1);border-radius:7px;padding:7px 9px;margin-bottom:5px">
         <div style="display:flex;justify-content:space-between;align-items:center">
-          <span class="bold" style="font-size:13px">${fmtDate(t.date)}</span>
-          <button onclick="reshareOldBill(${id},${origIdx})" style="border:none;background:var(--green-l);color:var(--green);border-radius:6px;padding:3px 10px;font-size:11px;font-weight:700;cursor:pointer">📋 Resend</button>
+          <span class="bold" style="font-size:12px">${fmtD(t.date)}</span>
+          <button onclick="resendBill(${id},${idx})" style="border:none;background:var(--green-l);color:var(--green);border-radius:5px;padding:2px 9px;font-size:11px;font-weight:700;cursor:pointer">📋 Resend</button>
         </div>
-        <div style="display:flex;gap:10px;font-size:12px;margin-top:3px;flex-wrap:wrap">
-          <span class="red-text">Bill:${fmt(t.amount||0)}</span>
-          <span class="green-text">Paid:${fmt(t.collected||0)}</span>
-          <span class="bold ${t.balance>0?'red-text':'green-text'}">Due:${fmt(t.balance||0)}</span>
+        <div style="display:flex;gap:8px;font-size:11px;margin-top:2px;flex-wrap:wrap">
+          <span class="rt">Bill:${fmt(t.amount||0)}</span>
+          <span class="gt">Paid:${fmt(t.collected||0)}</span>
+          <span class="bold ${t.balance>0?'rt':'gt'}">Due:${fmt(t.balance||0)}</span>
         </div>
-        ${t.items&&t.items.length?'<div class="small" style="margin-top:3px">'+t.items.map(it=>it.name+': '+it.pcs+' pcs').join(' · ')+'</div>':''}
-      </div>`;
-    }).join('')||'<div class="small" style="padding:8px;text-align:center">No bills yet</div>'}
-    <div class="section-hdr">Collections</div>
-    ${(s.transactions||[]).filter(t=>t.type==='collection').slice().reverse().slice(0,5).map(t=>`
-      <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--gray-2);font-size:12px">
-        <span>${fmtDate(t.date)}</span>
-        <span class="green-text bold">Collected: ${fmt(t.collected||0)}</span>
-        <span class="${t.balance>0?'red-text':'green-text'} bold">Due:${fmt(t.balance||0)}</span>
-      </div>`).join('')||'<div class="small" style="padding:8px;text-align:center">No collections yet</div>'}
+        ${t.items&&t.items.length?'<div class="sm" style="margin-top:2px">'+t.items.map(i=>i.name+':'+i.pcs).join(' · ')+'</div>':''}
+      </div>`;}).join(''):'<div class="sm" style="padding:8px;text-align:center">No bills yet</div>'}
+    <div class="shdr">Collections</div>
+    ${colls.length?colls.map(t=>`<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--gray-2);font-size:11px">
+      <span>${fmtD(t.date)}</span><span class="gt bold">${fmt(t.collected||0)}</span>
+      <span class="${t.balance>0?'rt':'gt'} bold">${fmt(t.balance||0)}</span>
+    </div>`).join(''):'<div class="sm" style="padding:8px;text-align:center">No collections</div>'}
   `;
-  document.getElementById('modal-shopdetail').classList.add('open');
+  openModal('m-shopdetail');
 }
-
 function quickCollect(id){
-  const s=DB.shops.find(sh=>sh.id===id);
-  if(!s) return;
+  const s=DB.shops.find(sh=>sh.id===id);if(!s)return;
   const cash=parseFloat(document.getElementById('qc-cash').value)||0;
   const online=parseFloat(document.getElementById('qc-online').value)||0;
   const total=cash+online;
   if(!total){showToast('Enter amount');return;}
   s.balance=Math.max(0,s.balance-total);
-  if(!s.transactions) s.transactions=[];
-  s.transactions.push({date:todayStr(),type:'collection',amount:0,collected:total,cash,online,balance:s.balance});
-  saveDB(); closeModal('modal-shopdetail'); renderShops();
+  if(!s.transactions)s.transactions=[];
+  s.transactions.push({date:today(),type:'collection',amount:0,collected:total,cash,online,balance:s.balance});
+  saveDB();closeModal('m-shopdetail');renderShops();
   showToast(`✅ ${fmt(total)} collected`);
 }
-
+function openEditShopModal(id){
+  const s=DB.shops.find(sh=>sh.id===id);if(!s)return;
+  document.getElementById('es-id').value=id;
+  document.getElementById('es-name').value=s.name;
+  document.getElementById('es-phone').value=s.phone||'';
+  document.getElementById('es-bal').value=s.balance||0;
+  openModal('m-editshop');
+}
+function updateShop(){
+  const id=parseInt(document.getElementById('es-id').value);
+  const s=DB.shops.find(sh=>sh.id===id);if(!s)return;
+  s.name=document.getElementById('es-name').value.trim()||s.name;
+  s.phone=document.getElementById('es-phone').value.trim();
+  s.balance=parseFloat(document.getElementById('es-bal').value)||0;
+  saveDB();closeModal('m-editshop');renderShops();updateShopSelects();showToast('✅ Shop updated');
+}
+function deleteShop(){
+  const id=parseInt(document.getElementById('es-id').value);
+  const s=DB.shops.find(sh=>sh.id===id);
+  if(!s||!confirm(`Remove "${s.name}"?`))return;
+  DB.shops=DB.shops.filter(sh=>sh.id!==id);
+  saveDB();closeModal('m-editshop');renderShops();updateShopSelects();showToast('🗑 Shop removed');
+}
 function updateShopSelects(){
-  const el=document.getElementById('challan-shop');
-  if(!el) return;
+  const el=document.getElementById('c-shop');if(!el)return;
   const cur=el.value;
   el.innerHTML='<option value="">-- Select Shop --</option>'+DB.shops.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');
-  if(cur) el.value=cur;
+  if(cur)el.value=cur;
+}
+function resendBill(shopId,txIdx){
+  const shop=DB.shops.find(s=>s.id===shopId);if(!shop)return;
+  const tx=shop.transactions[txIdx];
+  if(!tx||!tx.items||!tx.items.length){showToast('Bill data not found');return;}
+  const txt=makeBillText(shop,tx,'—','—','');
+  document.getElementById('m-resend-body').innerHTML=`
+    <div style="background:var(--gray-1);border-radius:7px;padding:9px;font-size:11px;margin-bottom:10px;white-space:pre-wrap;max-height:180px;overflow-y:auto">${txt.replace(/\*/g,'')}</div>
+    <button class="btn btn-green" onclick="openWA('${shop.phone}',window._resendTxt)">📲 Send on WhatsApp</button>
+    <button class="btn btn-outline" onclick="copyTxt(window._resendTxt);showToast('✅ Copied')" style="margin-top:6px">📋 Copy Text</button>`;
+  window._resendTxt=txt;
+  openModal('m-resend');
 }
 
-// ── CHALLAN ──
-function buildChallanTable(){
-  const tbody=document.getElementById('challan-tbody');
-  tbody.innerHTML=SKUS.map((s,i)=>{
-    const savedRate = DB.rates && DB.rates[s.name]!==undefined ? DB.rates[s.name] : s.rate;
-    return `<tr>
-      <td>
-        <div style="font-weight:600;font-size:12px">${s.name}</div>
-        <div class="small">${s.unit==='PCS'?'Per PCS':'1 CRT='+s.pcs+' pcs'}</div>
-      </td>
-      <td style="text-align:center">
-        <input class="qty-inp" type="number" id="cq-${i}" min="0" placeholder="0"
-               inputmode="numeric" style="width:60px" oninput="updateChallanTotal()">
-      </td>
-      <td style="text-align:center">
-        <input type="number" id="cr-${i}" value="${savedRate||''}" placeholder="Rate"
-               inputmode="decimal"
-               style="width:65px;padding:5px 3px;text-align:center;font-size:12px;border:1.5px solid ${savedRate>0?'var(--green)':'var(--gray-2)'};border-radius:6px;background:${savedRate>0?'var(--green-l)':'white'}"
-               oninput="updateChallanTotal()">
-      </td>
-      <td style="text-align:right;font-weight:700;font-size:12px;color:var(--blue-d)" id="ca-${i}">—</td>
-    </tr>`;
+// ══ CHALLAN ══
+function buildChallanList(){
+  const el=document.getElementById('c-list');
+  el.innerHTML=SKUS.map((s,i)=>{
+    const r=DB.rates&&DB.rates[s.name]!==undefined?DB.rates[s.name]:s.rate;
+    return `<div style="display:grid;grid-template-columns:1fr 58px 62px 58px;gap:4px;align-items:center;padding:5px 0;border-bottom:1px solid var(--gray-2)">
+      <div><div style="font-weight:600;font-size:12px">${s.name}</div>
+        <div class="sm">${s.unit==='PCS'?'Per PCS':'1 CRT='+s.pcs+' pcs'}</div></div>
+      <input class="qi" type="number" id="cq-${i}" min="0" placeholder="0" inputmode="numeric" oninput="updateCTotal()">
+      <input class="ri ${r>0?'set':''}" type="number" id="cr-${i}" value="${r||''}" placeholder="Rate" inputmode="decimal" oninput="updateCTotal()">
+      <div style="text-align:right;font-weight:700;font-size:11px;color:var(--blue-d)" id="ca-${i}">—</div>
+    </div>`;
   }).join('');
 }
-
-function loadShopBalance(){
-  const id=parseInt(document.getElementById('challan-shop').value);
+function loadShopBal(){
+  const id=parseInt(document.getElementById('c-shop').value);
   const s=DB.shops.find(sh=>sh.id===id);
   document.getElementById('c-prev').textContent=s?fmt(s.balance):'₹0';
-  // Clear all item quantities when shop changes
-  SKUS.forEach((_,i)=>{
-    const el=document.getElementById(`cq-${i}`);
-    if(el) el.value='';
-    const amt=document.getElementById(`ca-${i}`);
-    if(amt) amt.textContent='—';
-  });
-  // Clear collection fields
+  SKUS.forEach((_,i)=>{const el=document.getElementById(`cq-${i}`);if(el)el.value='';const a=document.getElementById(`ca-${i}`);if(a)a.textContent='—';});
   document.getElementById('c-cash').value='';
   document.getElementById('c-online').value='';
   document.getElementById('c-bal').textContent='₹0';
   document.getElementById('c-today').textContent='₹0';
   document.getElementById('c-grand').textContent=s?fmt(s.balance):'₹0';
-  // Hide previous bill output
-  document.getElementById('challan-output').style.display='none';
+  document.getElementById('c-output').style.display='none';
 }
-
-function updateChallanTotal(){
-  let total=0;
+function updateCTotal(){
+  let tot=0;
   SKUS.forEach((_,i)=>{
-    const qty=parseFloat(document.getElementById(`cq-${i}`)?.value)||0;
-    const rate=parseFloat(document.getElementById(`cr-${i}`)?.value)||0;
-    const amt=qty*rate;
-    total+=amt;
+    const q=parseFloat(document.getElementById(`cq-${i}`)?.value)||0;
+    const r=parseFloat(document.getElementById(`cr-${i}`)?.value)||0;
+    const a=q*r;tot+=a;
     const el=document.getElementById(`ca-${i}`);
-    if(el) el.textContent=qty>0?'₹'+amt.toFixed(0):'—';
+    if(el)el.textContent=q>0?'₹'+a.toFixed(0):'—';
   });
   const prev=parseFloat(document.getElementById('c-prev').textContent.replace(/[₹,]/g,''))||0;
-  document.getElementById('c-today').textContent=fmt(total);
-  document.getElementById('c-grand').textContent=fmt(total+prev);
-  updateCBal();
-  return total;
+  document.getElementById('c-today').textContent=fmt(tot);
+  document.getElementById('c-grand').textContent=fmt(tot+prev);
+  updateCBal();return tot;
 }
-
 function updateCBal(){
   const grand=parseFloat(document.getElementById('c-grand').textContent.replace(/[₹,]/g,''))||0;
   const cash=parseFloat(document.getElementById('c-cash').value)||0;
   const online=parseFloat(document.getElementById('c-online').value)||0;
   document.getElementById('c-bal').textContent=fmt(Math.max(0,grand-cash-online));
 }
-
+function makeBillText(shop,tx,billNo,staff,note){
+  return `🥛 *AAYUDHI ENTERPRISES*\nPatna | GSTIN: 10EOCPP4778G3ZT\n\n*Bill No:* ${billNo} | *Date:* ${fmtD(tx.date)}\n*Shop:* ${shop.name}\n*Phone:* ${shop.phone||'—'}\n*Staff:* ${staff}${note?'\n*Note:* '+note:''}\n\n*Items:*\n${tx.items.map(it=>`  ${it.name}: ${it.pcs} pcs @ ₹${(it.rate||0).toFixed(2)} = ₹${(it.amount||0).toFixed(0)}`).join('\n')}\n\n*Today's Bill:* ₹${(tx.amount||0).toFixed(0)}\n*Prev Balance:* ₹${(tx.prevBal||0).toFixed(0)}\n*Grand Total:* ₹${(tx.grandTotal||0).toFixed(0)}\n*Cash:* ₹${(tx.cash||0).toFixed(0)}\n*Online:* ₹${(tx.online||0).toFixed(0)}\n*Balance Due:* ₹${(tx.balance||0).toFixed(0)}\n\nUPI: [your-upi@bank]`;
+}
+function renderChallanHTML(shop,tx,billNo,staff,note){
+  return `<div style="text-align:center;font-family:var(--f);font-weight:800;font-size:15px;color:var(--blue-d)">AAYUDHI ENTERPRISES</div>
+  <div style="text-align:center;font-size:10px;color:var(--gray-3);margin-bottom:4px">Progressive Colony, JP Nagar, Bhoothnath Rd, Sampatchak, Patna-800026<br>GSTIN: 10EOCPP4778G3ZT</div>
+  <div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:2px"><span><b>Bill No:</b> ${billNo}</span><span><b>Date:</b> ${fmtD(tx.date)}</span></div>
+  <div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:2px"><span><b>Shop:</b> ${shop.name}</span><span><b>Staff:</b> ${staff}</span></div>
+  <div style="font-size:10px;margin-bottom:5px"><b>Phone:</b> ${shop.phone||'—'}${note?' | <b>Note:</b> '+note:''}</div>
+  <table class="ctbl"><tr><th style="text-align:left">Item</th><th>PCS</th><th>Rate</th><th>Amt(₹)</th></tr>
+  ${tx.items.map(it=>`<tr><td>${it.name}</td><td style="text-align:center">${it.pcs}</td><td style="text-align:right">₹${(it.rate||0).toFixed(2)}</td><td style="text-align:right">₹${(it.amount||0).toFixed(0)}</td></tr>`).join('')}
+  </table>
+  <div style="margin-top:7px;font-size:11px">
+    <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--gray-2)"><span>Today's Bill:</span><span><b>${fmt(tx.amount||0)}</b></span></div>
+    <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--gray-2)"><span>Prev Balance:</span><span class="rt"><b>${fmt(tx.prevBal||0)}</b></span></div>
+    <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--gray-2)"><span>Grand Total:</span><span><b>${fmt(tx.grandTotal||0)}</b></span></div>
+    <div style="display:flex;justify-content:space-between;padding:3px 0"><span>Cash:</span><span class="gt"><b>${fmt(tx.cash||0)}</b></span></div>
+    <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--gray-2)"><span>Online:</span><span class="gt"><b>${fmt(tx.online||0)}</b></span></div>
+    <div style="display:flex;justify-content:space-between;background:var(--red-l);border-radius:6px;padding:5px 8px;margin-top:4px">
+      <span><b>Balance Due:</b></span><span class="rt bold" style="font-size:14px">${fmt(tx.balance||0)}</span>
+    </div>
+  </div>
+  <div style="display:flex;justify-content:space-between;margin-top:12px;font-size:10px"><span>Customer: ___________</span><span>Staff: ___________</span></div>
+  <div style="text-align:center;margin-top:7px;font-size:10px;color:var(--gray-3)">📱 UPI: [your-upi@bank] | Thank you!</div>`;
+}
 function saveChallan(){
-  const shopId=parseInt(document.getElementById('challan-shop').value);
+  const shopId=parseInt(document.getElementById('c-shop').value);
   const shop=DB.shops.find(s=>s.id===shopId);
   if(!shop){showToast('Select a shop');return;}
-  const date=document.getElementById('challan-date').value||todayStr();
+  const date=document.getElementById('c-date').value||today();
   const cash=parseFloat(document.getElementById('c-cash').value)||0;
   const online=parseFloat(document.getElementById('c-online').value)||0;
   const collected=cash+online;
-
-  const items=[]; let todayTotal=0;
+  const items=[];let todayTotal=0;
   SKUS.forEach((s,i)=>{
     const pcs=parseFloat(document.getElementById(`cq-${i}`)?.value)||0;
     const rate=parseFloat(document.getElementById(`cr-${i}`)?.value)||0;
-    if(pcs>0){
-      const amt=pcs*rate;
-      items.push({name:s.name,pcs,rate,amount:amt});
-      todayTotal+=amt;
-      if(!DB.stock[i]) DB.stock[i]={opening:0,delivered:0};
-      const crtDeducted=s.unit==='PCS'?pcs:Math.ceil(pcs/s.pcs);
-      DB.stock[i].delivered=(DB.stock[i].delivered||0)+crtDeducted;
+    if(pcs>0){const amt=pcs*rate;items.push({name:s.name,pcs,rate,amount:amt});todayTotal+=amt;
+      if(!DB.stock[i])DB.stock[i]={opening:0,delivered:0};
+      DB.stock[i].delivered=(DB.stock[i].delivered||0)+(s.unit==='PCS'?pcs:Math.ceil(pcs/s.pcs));
     }
   });
   if(!items.length){showToast('Enter at least one item');return;}
-
   const prevBal=shop.balance;
   const grandTotal=todayTotal+prevBal;
   const newBalance=Math.max(0,grandTotal-collected);
-
-  if(!shop.transactions) shop.transactions=[];
-  if(!DB.nextBillId) DB.nextBillId=1;
-  const billId=DB.nextBillId++;
-  shop.transactions.push({id:billId,date,type:'delivery',amount:todayTotal,collected,cash,online,balance:newBalance,items});
+  if(!shop.transactions)shop.transactions=[];
+  // Save rates
+  if(!DB.rates)DB.rates={};
+  SKUS.forEach((s,i)=>{const r=parseFloat(document.getElementById(`cr-${i}`)?.value)||0;if(r>0)DB.rates[s.name]=r;});
+  const tx={date,type:'delivery',amount:todayTotal,prevBal,grandTotal,collected,cash,online,balance:newBalance,items};
+  shop.transactions.push(tx);
   shop.balance=newBalance;
-  // Save rates used in this bill globally for next time
-  if(!DB.rates) DB.rates={};
-  SKUS.forEach((s,i)=>{
-    const r=parseFloat(document.getElementById(`cr-${i}`)?.value)||0;
-    if(r>0) DB.rates[s.name]=r;
-  });
-  saveDB(); renderShops();
-
-  // Store bill data for editing/regeneration
-  window._billData={shop,date,items,todayTotal,prevBal,grandTotal,cash,online,newBalance,billNo:'',staff:'',note:''};
-
-  // Clear edit fields
-  ['bill-no','bill-staff','bill-note'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
-
-  renderBill();
-  document.getElementById('challan-output').style.display='block';
-  showToast('✅ Challan saved — edit details below if needed');
+  window._billTx=tx;window._billShop=shop;
+  saveDB();renderShops();
+  document.getElementById('b-no').value='';
+  document.getElementById('b-staff').value='';
+  document.getElementById('b-note').value='';
+  document.getElementById('c-print').innerHTML=renderChallanHTML(shop,tx,'—','—','');
+  window._billTxt=makeBillText(shop,tx,'—','—','');
+  document.getElementById('c-output').style.display='block';
+  showToast('✅ Challan saved');
 }
-
 function regenerateBill(){
-  if(!window._billData){showToast('Save a challan first');return;}
-  window._billData.billNo = document.getElementById('bill-no').value||'';
-  window._billData.staff  = document.getElementById('bill-staff').value||'';
-  window._billData.note   = document.getElementById('bill-note').value||'';
-  renderBill();
+  if(!window._billTx||!window._billShop){showToast('Save a challan first');return;}
+  const n=document.getElementById('b-no').value||'—';
+  const s=document.getElementById('b-staff').value||'—';
+  const nt=document.getElementById('b-note').value||'';
+  document.getElementById('c-print').innerHTML=renderChallanHTML(window._billShop,window._billTx,n,s,nt);
+  window._billTxt=makeBillText(window._billShop,window._billTx,n,s,nt);
   showToast('✅ Bill updated');
 }
-
-function renderBill(){
-  const d=window._billData;
-  if(!d) return;
-  const billNo=d.billNo||'—';
-  const staff=d.staff||'—';
-  const note=d.note||'';
-  document.getElementById('challan-print-area').innerHTML=`
-    <div style="text-align:center;font-family:var(--font);font-weight:800;font-size:16px;color:var(--blue-d)">AAYUDHI ENTERPRISES</div>
-    <div style="text-align:center;font-size:10px;color:var(--gray-3);margin-bottom:4px">Progressive Colony, JP Nagar, Bhoothnath Rd, Sampatchak, Patna-800026<br>GSTIN: 10EOCPP4778G3ZT</div>
-    <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px">
-      <span><b>Bill No:</b> ${billNo}</span><span><b>Date:</b> ${fmtDate(d.date)}</span>
-    </div>
-    <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px">
-      <span><b>Shop:</b> ${d.shop.name}</span><span><b>Staff:</b> ${staff}</span>
-    </div>
-    <div style="font-size:11px;margin-bottom:6px"><b>Phone:</b> ${d.shop.phone||'—'}${note?' &nbsp;|&nbsp; <b>Note:</b> '+note:''}</div>
-    <table class="challan-table">
-      <tr><th style="text-align:left">Item</th><th>PCS</th><th>Rate(₹)</th><th>Amt(₹)</th></tr>
-      ${d.items.map(it=>`<tr>
-        <td>${it.name}</td>
-        <td style="text-align:center">${it.pcs}</td>
-        <td style="text-align:right">${it.rate.toFixed(2)}</td>
-        <td style="text-align:right">${it.amount.toFixed(0)}</td>
-      </tr>`).join('')}
-    </table>
-    <div style="margin-top:8px;font-size:12px">
-      <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--gray-2)"><span>Today's Bill:</span><span><b>${fmt(d.todayTotal)}</b></span></div>
-      <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--gray-2)"><span>Balance B/F:</span><span class="red-text"><b>${fmt(d.prevBal)}</b></span></div>
-      <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--gray-2)"><span>Grand Total:</span><span><b>${fmt(d.grandTotal)}</b></span></div>
-      <div style="display:flex;justify-content:space-between;padding:4px 0"><span>Cash:</span><span class="green-text"><b>${fmt(d.cash)}</b></span></div>
-      <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--gray-2)"><span>Online/UPI:</span><span class="green-text"><b>${fmt(d.online)}</b></span></div>
-      <div style="display:flex;justify-content:space-between;background:var(--red-l);border-radius:6px;padding:6px 8px;margin-top:4px">
-        <span><b>Balance Due:</b></span><span class="red-text bold" style="font-size:15px">${fmt(d.newBalance)}</span>
-      </div>
-    </div>
-    <div style="display:flex;justify-content:space-between;margin-top:14px;font-size:11px">
-      <span>Customer: ___________</span><span>Staff: ___________</span>
-    </div>
-    <div style="text-align:center;margin-top:8px;font-size:10px;color:var(--gray-3)">📱 UPI: [your-upi@bank] | Thank you!</div>`;
-
-  window._challanText=`🥛 *AAYUDHI ENTERPRISES*\nPatna | GSTIN: 10EOCPP4778G3ZT\n\n*Bill No:* ${billNo} | *Date:* ${fmtDate(d.date)}\n*Shop:* ${d.shop.name}\n*Phone:* ${d.shop.phone||'—'}\n*Staff:* ${staff}${note?'\n*Note:* '+note:''}\n\n*Items Delivered:*\n${d.items.map(it=>`  ${it.name}: ${it.pcs} pcs @ ₹${it.rate.toFixed(2)} = ₹${it.amount.toFixed(0)}`).join('\n')}\n\n*Today's Bill:* ₹${d.todayTotal.toFixed(0)}\n*Balance B/F:* ₹${d.prevBal.toFixed(0)}\n*Grand Total:* ₹${d.grandTotal.toFixed(0)}\n*Cash:* ₹${d.cash.toFixed(0)}\n*Online:* ₹${d.online.toFixed(0)}\n*Balance Due:* ₹${d.newBalance.toFixed(0)}\n\nUPI: [your-upi@bank]`;
+function sendWA(){
+  if(!window._billTxt){showToast('Generate a bill first');return;}
+  openWA(window._billShop?window._billShop.phone:'',window._billTxt);
+}
+function copyBill(){
+  if(!window._billTxt){showToast('Generate a bill first');return;}
+  copyTxt(window._billTxt);showToast('✅ Copied');
 }
 
-function copyChallan(){
-  if(!window._challanText) return;
-  copyText(window._challanText);
-  showToast('✅ Copied — paste in WhatsApp');
-}
-
-// ── STOCK ──
-function renderStock(){
-  const el=document.getElementById('stock-list');
-  const lowEl=document.getElementById('low-stock-list');
-  const lowItems=[];
-
-  el.innerHTML=SKUS.map((s,i)=>{
-    const st=DB.stock[i]||{opening:0,delivered:0};
-    const remaining=Math.max(0,(st.opening||0)-(st.delivered||0));
-    const remainingPcs=s.unit==='PCS'?remaining:remaining*s.pcs;
-    const isLow=remaining<=1 && st.opening>0;
-    if(isLow) lowItems.push({name:s.name,remaining,unit:s.unit});
-    const rowBg=st.opening===0?'':(isLow?'background:var(--red-l)':'background:var(--green-l)');
-    return `<div class="stk-row" style="${rowBg}">
-      <div style="font-size:12px;font-weight:600">${s.name}<br><span class="small">${s.unit==='PCS'?'Per PCS':'1 CRT='+s.pcs+'pcs'}</span></div>
-      <div style="text-align:center">
-        <input class="stk-inp" type="number" id="stk-${i}" value="${st.opening||0}"
-               min="0" inputmode="numeric" style="width:100%">
-      </div>
-      <div style="text-align:center;font-weight:700;color:var(--orange)">${st.delivered||0}</div>
-      <div style="text-align:center;font-weight:800;color:${isLow?'var(--red)':'var(--green)'}">${remaining}</div>
-      <div style="text-align:center;font-size:11px;color:var(--blue-d);font-weight:700">${remainingPcs>0?remainingPcs+' pcs':'—'}</div>
-    </div>`;
-  }).join('');
-
-  lowEl.innerHTML=lowItems.length
-    ? lowItems.map(l=>`<div style="padding:7px 10px;background:var(--red-l);border-radius:8px;margin-bottom:6px;display:flex;justify-content:space-between">
-        <span class="bold red-text">${l.name}</span>
-        <span class="red-text">${l.remaining} ${l.unit} remaining</span>
-      </div>`).join('')
-    : '<div class="small" style="text-align:center;padding:10px;color:var(--green)">✅ All stock levels OK</div>';
-}
-
-function saveStock(){
-  SKUS.forEach((_,i)=>{
-    const el=document.getElementById(`stk-${i}`);
-    if(!DB.stock[i]) DB.stock[i]={opening:0,delivered:0};
-    if(el) DB.stock[i].opening=parseFloat(el.value)||0;
-  });
-  saveDB(); renderStock(); showToast('✅ Stock saved');
-}
-
-function resetStock(){
-  if(!confirm('Reset all delivered quantities to 0?')) return;
-  SKUS.forEach((_,i)=>{ if(DB.stock[i]) DB.stock[i].delivered=0; });
-  saveDB(); renderStock(); showToast('✅ Stock reset');
-}
-
-// ── REPORT ──
-function renderReport(){
-  const tp=DB.diary.reduce((s,d)=>s+d.paid,0);
-  const tc=DB.diary.reduce((s,d)=>s+d.cash,0);
-  const to=DB.diary.reduce((s,d)=>s+d.online,0);
-  const tt=tc+to; const pl=tt-tp;
-  const pct=tp>0?Math.round(tt/tp*100):0;
-  document.getElementById('rep-paid').textContent=fmt(tp);
-  document.getElementById('rep-coll').textContent=fmt(tt);
-  document.getElementById('rep-pl').textContent=fmt(pl);
-  document.getElementById('rep-pl').className='chip-val '+(pl>=0?'green-text':'red-text');
-  document.getElementById('rep-pct').textContent=pct+'%';
-  document.getElementById('rep-cash').textContent=fmt(tc);
-  document.getElementById('rep-online').textContent=fmt(to);
-
-  const el=document.getElementById('monthly-table');
-  const totalExp2=(DB.expenses||[]).reduce((s,e)=>s+e.amt,0);
-  const netAfterExp2=tt-tp-totalExp2;
-  let html=`<div style="background:var(--red-l);border-radius:8px;padding:10px;margin-bottom:10px;font-size:12px">
-    <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="bold">Total Expenses:</span><span class="bold red-text">${fmt(totalExp2)}</span></div>
-    <div style="display:flex;justify-content:space-between"><span class="bold">Net Profit (after expenses):</span><span class="bold ${netAfterExp2>=0?'green-text':'red-text'}">${fmt(netAfterExp2)}</span></div>
-  </div>`;
-  if(!DB.diary.length){el.innerHTML=html+'<div class="small" style="text-align:center;padding:16px">No diary entries</div>';return;}
-  el.innerHTML=html;
-
-  // Get today's stock for remaining column
-  const stockSummary=SKUS.map((s,i)=>{
-    const st=DB.stock[i]||{opening:0,delivered:0};
-    return Math.max(0,(st.opening||0)-(st.delivered||0));
-  });
-  const totalRemCrt=stockSummary.reduce((s,v)=>s+v,0);
-  const totalRemPcs=SKUS.reduce((sum,s,i)=>sum+(s.unit==='PCS'?stockSummary[i]:stockSummary[i]*s.pcs),0);
-
-  el.innerHTML=`
-    <div style="background:var(--blue-l);border-radius:8px;padding:10px;margin-bottom:10px;font-size:12px">
-      <b>Today's Remaining Stock:</b><br>
-      ${totalRemCrt} CRT / ${totalRemPcs} pcs total across all SKUs<br>
-      <span class="small"><a href="#" onclick="showPage('stock',document.querySelectorAll('.nav-btn')[4]);return false">→ View full stock page</a></span>
-    </div>
-    <div style="overflow-x:auto">
-    <table style="width:100%;border-collapse:collapse;font-size:12px">
-      <tr style="background:var(--blue-d);color:white">
-        <th style="padding:6px 4px">Date</th>
-        <th style="padding:6px 4px">Paid</th>
-        <th style="padding:6px 4px">Cash</th>
-        <th style="padding:6px 4px">Online</th>
-        <th style="padding:6px 4px">P&L</th>
-      </tr>
-      ${DB.diary.map((d,i)=>{
-        const tot=d.cash+d.online; const pl=tot-d.paid;
-        return `<tr style="background:${i%2===0?'white':'var(--gray-1)'}">
-          <td style="padding:5px 4px">${fmtDate(d.date)}</td>
-          <td style="padding:5px 4px;text-align:right;color:var(--red)">${fmt(d.paid)}</td>
-          <td style="padding:5px 4px;text-align:right;color:var(--green)">${fmt(d.cash)}</td>
-          <td style="padding:5px 4px;text-align:right;color:var(--blue)">${fmt(d.online)}</td>
-          <td style="padding:5px 4px;text-align:right;font-weight:700;color:${pl>=0?'var(--green)':'var(--red)'}">${pl>=0?'+':''}${fmt(pl)}</td>
-        </tr>`;
-      }).join('')}
-    </table></div>`;
-}
-
-function exportDiary(){
-  if(!DB.diary.length){showToast('No entries');return;}
-  const lines=DB.diary.map(d=>`${fmtDate(d.date)} | Paid:${fmt(d.paid)} | Cash:${fmt(d.cash)} | Online:${fmt(d.online)} | P&L:${fmt((d.cash+d.online)-d.paid)}`).join('\n');
-  navigator.clipboard.writeText(`Aayudhi Enterprises\nMonthly Diary\n\n${lines}`).then(()=>showToast('✅ Copied!'));
-}
-
-// ── DIARY EDIT ──
-function openEditDiary(date){
-  const d=DB.diary.find(e=>e.date===date);
-  if(!d) return;
-  document.getElementById('edit-diary-date-orig').value=date;
-  document.getElementById('edit-diary-date').value=d.date;
-  document.getElementById('edit-diary-paid').value=d.paid;
-  document.getElementById('edit-diary-cash').value=d.cash;
-  document.getElementById('edit-diary-online').value=d.online;
-  document.getElementById('edit-diary-inv').value=d.inv||'';
-  document.getElementById('modal-edit-diary').classList.add('open');
-}
-
-function updateDiaryEntry(){
-  const orig=document.getElementById('edit-diary-date-orig').value;
-  const idx=DB.diary.findIndex(d=>d.date===orig);
-  if(idx<0) return;
-  DB.diary[idx]={
-    date:document.getElementById('edit-diary-date').value,
-    paid:parseFloat(document.getElementById('edit-diary-paid').value)||0,
-    cash:parseFloat(document.getElementById('edit-diary-cash').value)||0,
-    online:parseFloat(document.getElementById('edit-diary-online').value)||0,
-    inv:document.getElementById('edit-diary-inv').value
-  };
-  DB.diary.sort((a,b)=>b.date.localeCompare(a.date));
-  saveDB(); closeModal('modal-edit-diary'); renderDiary(); updateDashboard();
-  showToast('✅ Diary entry updated');
-}
-
-function deleteDiaryEntry(){
-  const orig=document.getElementById('edit-diary-date-orig').value;
-  if(!confirm('Delete this diary entry?')) return;
-  DB.diary=DB.diary.filter(d=>d.date!==orig);
-  saveDB(); closeModal('modal-edit-diary'); renderDiary(); updateDashboard();
-  showToast('🗑 Entry deleted');
-}
-
-// ── SHOP EDIT / DELETE ──
-function openEditShop(id){
-  const s=DB.shops.find(sh=>sh.id===id);
-  if(!s) return;
-  document.getElementById('edit-shop-id').value=id;
-  document.getElementById('edit-shop-name').value=s.name;
-  document.getElementById('edit-shop-phone').value=s.phone||'';
-  document.getElementById('edit-shop-bal').value=s.balance||0;
-  document.getElementById('modal-edit-shop').classList.add('open');
-}
-
-function updateShop(){
-  const id=parseInt(document.getElementById('edit-shop-id').value);
-  const s=DB.shops.find(sh=>sh.id===id);
-  if(!s) return;
-  s.name=document.getElementById('edit-shop-name').value.trim()||s.name;
-  s.phone=document.getElementById('edit-shop-phone').value.trim();
-  s.balance=parseFloat(document.getElementById('edit-shop-bal').value)||0;
-  saveDB(); closeModal('modal-edit-shop'); renderShops(); updateShopSelects();
-  showToast('✅ Shop updated');
-}
-
-function deleteShop(){
-  const id=parseInt(document.getElementById('edit-shop-id').value);
-  const s=DB.shops.find(sh=>sh.id===id);
-  if(!s) return;
-  if(!confirm(`Remove "${s.name}"? This cannot be undone.`)) return;
-  DB.shops=DB.shops.filter(sh=>sh.id!==id);
-  saveDB(); closeModal('modal-edit-shop'); renderShops(); updateShopSelects();
-  showToast('🗑 Shop removed');
-}
-
-// ── EXPENSES ──
+// ══ EXPENSES ══
 function saveExpense(){
-  const date=document.getElementById('exp-date').value||todayStr();
+  const date=document.getElementById('exp-date').value||today();
   const cat=document.getElementById('exp-cat').value;
   const desc=document.getElementById('exp-desc').value.trim();
   const amt=parseFloat(document.getElementById('exp-amt').value)||0;
   if(!amt){showToast('Enter amount');return;}
-  if(!DB.expenses) DB.expenses=[];
-  if(!DB.nextExpId) DB.nextExpId=1;
+  if(!DB.expenses)DB.expenses=[];
+  if(!DB.nextExpId)DB.nextExpId=1;
   DB.expenses.push({id:DB.nextExpId++,date,cat,desc,amt});
   DB.expenses.sort((a,b)=>b.date.localeCompare(a.date));
-  saveDB(); renderExpenses();
+  saveDB();renderExpenses();
   document.getElementById('exp-desc').value='';
   document.getElementById('exp-amt').value='';
-  showToast('✅ Expense saved');
+  showToast('✅ Saved');
 }
-
 function renderExpenses(){
-  if(!DB.expenses) DB.expenses=[];
-  const el=document.getElementById('exp-list');
-  const totalMonth=DB.expenses.reduce((s,e)=>s+e.amt,0);
-  const fuel=DB.expenses.filter(e=>e.cat==='Fuel').reduce((s,e)=>s+e.amt,0);
-  const misc=DB.expenses.filter(e=>e.cat!=='Fuel').reduce((s,e)=>s+e.amt,0);
-  document.getElementById('exp-total-month').textContent=fmt(totalMonth);
+  if(!DB.expenses)DB.expenses=[];
+  const total=DB.expenses.reduce((s,e)=>s+e.amt,0);
+  const fuel=DB.expenses.filter(e=>e.cat.includes('Fuel')).reduce((s,e)=>s+e.amt,0);
+  document.getElementById('exp-total').textContent=fmt(total);
   document.getElementById('exp-fuel').textContent=fmt(fuel);
-  document.getElementById('exp-misc').textContent=fmt(misc);
-  if(!DB.expenses.length){el.innerHTML='<div class="small" style="text-align:center;padding:10px">No expenses yet</div>';return;}
+  document.getElementById('exp-misc').textContent=fmt(total-fuel);
+  const el=document.getElementById('exp-list');
+  if(!DB.expenses.length){el.innerHTML='<div class="sm" style="text-align:center;padding:10px">No expenses yet</div>';return;}
   el.innerHTML=DB.expenses.map(e=>`
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--gray-2)">
-      <div>
-        <div style="font-weight:600;font-size:13px">${e.cat}</div>
-        <div class="small">${fmtDate(e.date)}${e.desc?' · '+e.desc:''}</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <span class="bold red-text">${fmt(e.amt)}</span>
-        <button onclick="openEditExpense(${e.id})" style="border:none;background:var(--blue-l);color:var(--blue);border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700;cursor:pointer">✏️</button>
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--gray-2)">
+      <div><div style="font-weight:600;font-size:12px">${e.cat}</div>
+        <div class="sm">${fmtD(e.date)}${e.desc?' · '+e.desc:''}</div></div>
+      <div style="display:flex;align-items:center;gap:7px">
+        <span class="bold rt">${fmt(e.amt)}</span>
+        <button onclick="openEditExp(${e.id})" style="border:none;background:var(--blue-l);color:var(--blue);border-radius:5px;padding:2px 7px;font-size:11px;font-weight:700;cursor:pointer">✏️</button>
       </div>
     </div>`).join('');
 }
-
-function openEditExpense(id){
-  if(!DB.expenses) return;
-  const e=DB.expenses.find(x=>x.id===id);
-  if(!e) return;
-  document.getElementById('edit-exp-id').value=id;
-  document.getElementById('edit-exp-date').value=e.date;
-  document.getElementById('edit-exp-cat').value=e.cat;
-  document.getElementById('edit-exp-desc').value=e.desc||'';
-  document.getElementById('edit-exp-amt').value=e.amt;
-  document.getElementById('modal-edit-expense').classList.add('open');
+function openEditExp(id){
+  const e=(DB.expenses||[]).find(x=>x.id===id);if(!e)return;
+  document.getElementById('ee-id').value=id;
+  document.getElementById('ee-date').value=e.date;
+  document.getElementById('ee-cat').value=e.cat;
+  document.getElementById('ee-desc').value=e.desc||'';
+  document.getElementById('ee-amt').value=e.amt;
+  openModal('m-editexp');
 }
-
 function updateExpense(){
-  const id=parseInt(document.getElementById('edit-exp-id').value);
-  const idx=DB.expenses.findIndex(e=>e.id===id);
-  if(idx<0) return;
-  DB.expenses[idx]={
-    id,
-    date:document.getElementById('edit-exp-date').value,
-    cat:document.getElementById('edit-exp-cat').value,
-    desc:document.getElementById('edit-exp-desc').value,
-    amt:parseFloat(document.getElementById('edit-exp-amt').value)||0
-  };
+  const id=parseInt(document.getElementById('ee-id').value);
+  const idx=(DB.expenses||[]).findIndex(e=>e.id===id);if(idx<0)return;
+  DB.expenses[idx]={id,date:document.getElementById('ee-date').value,cat:document.getElementById('ee-cat').value,desc:document.getElementById('ee-desc').value,amt:parseFloat(document.getElementById('ee-amt').value)||0};
   DB.expenses.sort((a,b)=>b.date.localeCompare(a.date));
-  saveDB(); closeModal('modal-edit-expense'); renderExpenses();
-  showToast('✅ Expense updated');
+  saveDB();closeModal('m-editexp');renderExpenses();showToast('✅ Updated');
 }
-
 function deleteExpense(){
-  const id=parseInt(document.getElementById('edit-exp-id').value);
-  if(!confirm('Delete this expense?')) return;
+  const id=parseInt(document.getElementById('ee-id').value);
+  if(!confirm('Delete this expense?'))return;
   DB.expenses=DB.expenses.filter(e=>e.id!==id);
-  saveDB(); closeModal('modal-edit-expense'); renderExpenses();
-  showToast('🗑 Expense deleted');
+  saveDB();closeModal('m-editexp');renderExpenses();showToast('🗑 Deleted');
 }
 
-// ── RESEND OLD BILL ──
-function buildBillText(shop, tx){
-  return `🥛 *AAYUDHI ENTERPRISES*\nPatna | GSTIN: 10EOCPP4778G3ZT\n\n*Shop:* ${shop.name}\n*Phone:* ${shop.phone||'—'}\n*Date:* ${fmtDate(tx.date)}\n\n*Items Delivered:*\n${tx.items.map(it=>`  ${it.name}: ${it.pcs} pcs @ ₹${(it.rate||0).toFixed(2)} = ₹${(it.amount||0).toFixed(0)}`).join('\n')}\n\n*Bill Amount:* ₹${(tx.amount||0).toFixed(0)}\n*Cash Paid:* ₹${(tx.cash||0).toFixed(0)}\n*Online Paid:* ₹${(tx.online||0).toFixed(0)}\n*Balance Due:* ₹${(tx.balance||0).toFixed(0)}\n\nUPI: [your-upi@bank]`;
+// ══ STOCK ══
+function renderStock(){
+  const el=document.getElementById('stk-list');
+  const low=[];
+  el.innerHTML=SKUS.map((s,i)=>{
+    const st=DB.stock[i]||{opening:0,delivered:0};
+    const rem=Math.max(0,(st.opening||0)-(st.delivered||0));
+    const remPcs=s.unit==='PCS'?rem:rem*s.pcs;
+    const isLow=rem<=1&&st.opening>0;
+    if(isLow)low.push({name:s.name,rem,unit:s.unit});
+    return `<div class="stk-row" style="${st.opening===0?'':isLow?'background:var(--red-l)':'background:var(--green-l)'}">
+      <div style="font-size:11px;font-weight:600">${s.name}<br><span class="sm">${s.unit==='PCS'?'PCS':'1CRT='+s.pcs+'pcs'}</span></div>
+      <div style="text-align:center"><input class="stk-inp" type="number" id="stk-${i}" value="${st.opening||0}" min="0" inputmode="numeric"></div>
+      <div style="text-align:center;font-weight:700;color:var(--orange)">${st.delivered||0}</div>
+      <div style="text-align:center;font-weight:800;color:${isLow?'var(--red)':'var(--green)'}">${rem}</div>
+      <div style="text-align:center;font-size:11px;color:var(--blue-d);font-weight:700">${remPcs>0?remPcs+'pcs':'—'}</div>
+    </div>`;
+  }).join('');
+  const lowEl=document.getElementById('low-stk');
+  lowEl.innerHTML=low.length?low.map(l=>`<div style="padding:6px 9px;background:var(--red-l);border-radius:7px;margin-bottom:5px;display:flex;justify-content:space-between"><span class="bold rt">${l.name}</span><span class="rt">${l.rem} ${l.unit} left</span></div>`).join(''):'<div class="sm" style="text-align:center;padding:10px;color:var(--green)">✅ All stock OK</div>';
+}
+function saveStock(){
+  SKUS.forEach((_,i)=>{const el=document.getElementById(`stk-${i}`);if(!DB.stock[i])DB.stock[i]={opening:0,delivered:0};if(el)DB.stock[i].opening=parseFloat(el.value)||0;});
+  saveDB();renderStock();showToast('✅ Stock saved');
 }
 
-function copyText(text){
-  navigator.clipboard.writeText(text).catch(()=>{
-    const ta=document.createElement('textarea');
-    ta.value=text; document.body.appendChild(ta); ta.select();
-    document.execCommand('copy'); document.body.removeChild(ta);
-  });
+// ══ REPORT ══
+function renderReport(){
+  const tp=DB.diary.reduce((s,d)=>s+d.paid,0);
+  const tc=DB.diary.reduce((s,d)=>s+d.cash,0);
+  const to=DB.diary.reduce((s,d)=>s+d.online,0);
+  const tt=tc+to;const pl=tt-tp;
+  const pct=tp>0?Math.round(tt/tp*100):0;
+  document.getElementById('r-paid').textContent=fmt(tp);
+  document.getElementById('r-coll').textContent=fmt(tt);
+  document.getElementById('r-pl').textContent=fmt(pl);
+  document.getElementById('r-pl').className='cv '+(pl>=0?'gt':'rt');
+  document.getElementById('r-pct').textContent=pct+'%';
+  document.getElementById('r-cash').textContent=fmt(tc);
+  document.getElementById('r-online').textContent=fmt(to);
+  const totalExp=(DB.expenses||[]).reduce((s,e)=>s+e.amt,0);
+  const net=pl-totalExp;
+  document.getElementById('r-exp-summary').innerHTML=`<div style="background:var(--red-l);border-radius:8px;padding:9px 11px;margin-bottom:9px;font-size:12px">
+    <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="bold">Total Expenses:</span><span class="bold rt">${fmt(totalExp)}</span></div>
+    <div style="display:flex;justify-content:space-between"><span class="bold">Net Profit (after expenses):</span><span class="bold ${net>=0?'gt':'rt'}">${fmt(net)}</span></div>
+  </div>`;
+  const el=document.getElementById('r-table');
+  if(!DB.diary.length){el.innerHTML='<div class="sm" style="text-align:center;padding:14px">No entries</div>';return;}
+  el.innerHTML=`<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:11px">
+    <tr style="background:var(--blue-d);color:#fff">
+      <th style="padding:5px 4px">Date</th><th style="padding:5px 4px">Paid</th>
+      <th style="padding:5px 4px">Cash</th><th style="padding:5px 4px">Online</th><th style="padding:5px 4px">P&L</th>
+    </tr>
+    ${DB.diary.map((d,i)=>{const tot=d.cash+d.online;const pl=tot-d.paid;
+      return `<tr style="background:${i%2===0?'#fff':'var(--gray-1)'}">
+        <td style="padding:4px">${fmtD(d.date)}</td>
+        <td style="padding:4px;text-align:right;color:var(--red)">${fmt(d.paid)}</td>
+        <td style="padding:4px;text-align:right;color:var(--green)">${fmt(d.cash)}</td>
+        <td style="padding:4px;text-align:right;color:var(--blue)">${fmt(d.online)}</td>
+        <td style="padding:4px;text-align:right;font-weight:700;color:${pl>=0?'var(--green)':'var(--red)'}">${pl>=0?'+':''}${fmt(pl)}</td>
+      </tr>`;}).join('')}
+  </table></div>`;
+}
+function exportDiary(){
+  if(!DB.diary.length){showToast('No entries');return;}
+  const lines=DB.diary.map(d=>`${fmtD(d.date)} | Paid:${fmt(d.paid)} | Cash:${fmt(d.cash)} | Online:${fmt(d.online)} | P&L:${fmt((d.cash+d.online)-d.paid)}`).join('\n');
+  copyTxt(`Aayudhi Enterprises\nMonthly Diary\n\n${lines}`);showToast('✅ Copied');
 }
 
-function openWhatsApp(phone, text){
-  const clean=(phone||'').replace(/[^0-9]/g,'');
-  const encoded=encodeURIComponent(text);
-  if(clean && clean.length>=10){
-    window.open(`https://wa.me/91${clean.slice(-10)}?text=${encoded}`,'_blank');
-  } else {
-    window.open(`https://wa.me/?text=${encoded}`,'_blank');
-    showToast('No phone saved — opening WhatsApp without number');
-  }
+// ══ BACKUP / RESTORE ══
+function backupData(){
+  const data=JSON.stringify(DB);
+  const date=new Date().toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'2-digit'});
+  const txt=`Aayudhi Enterprises Backup\nDate: ${date}\nShops:${DB.shops.length} Diary:${DB.diary.length} Expenses:${(DB.expenses||[]).length}\n---DATA---\n${data}\n---END---`;
+  copyTxt(txt);
+  showToast('✅ Backup copied');
+  if(confirm('Open WhatsApp to send backup to yourself?'))window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');
+}
+function restoreBackup(){
+  const input=prompt('Paste full backup text here:');
+  if(!input)return;
+  try{
+    const s=input.indexOf('---DATA---');const e=input.indexOf('---END---');
+    if(s<0||e<0){showToast('❌ Invalid backup text');return;}
+    const restored=JSON.parse(input.substring(s+10,e).trim());
+    if(!restored.shops||!restored.diary){showToast('❌ Invalid format');return;}
+    if(!confirm(`Restore?\nShops:${restored.shops.length} Diary:${restored.diary.length}\nThis replaces all current data.`))return;
+    DB=restored;
+    if(DB.skus&&DB.skus.length)SKUS=[...DB.skus];
+    if(DB.rates)SKUS.forEach(s=>{if(DB.rates[s.name]!==undefined)s.rate=DB.rates[s.name];});
+    saveDB();renderDiary();renderShops();renderReport();renderExpenses();updateDashboard();
+    showToast('✅ Data restored');
+  }catch(e){showToast('❌ Failed — check backup text');}
 }
 
-function sendToWhatsApp(){
-  if(!window._challanText){showToast('Generate a bill first');return;}
-  const phone=(window._billData&&window._billData.shop)?window._billData.shop.phone:'';
-  openWhatsApp(phone, window._challanText);
-}
-
-function reshareOldBill(shopId, txIndex){
-  const shop=DB.shops.find(s=>s.id===shopId);
-  if(!shop) return;
-  const tx=shop.transactions[txIndex];
-  if(!tx||!tx.items||!tx.items.length){showToast('Bill data not found');return;}
-  const text=buildBillText(shop,tx);
-  // Show options: send directly or copy
-  window._reshareText=text;
-  window._resharePhone=shop.phone;
-  window._reshareShopName=shop.name;
-  document.getElementById('modal-resend-content').innerHTML=`
-    <div style="background:var(--gray-1);border-radius:8px;padding:10px;font-size:12px;margin-bottom:12px;white-space:pre-wrap;max-height:200px;overflow-y:auto">${text.replace(/\*/g,'')}</div>
-    <button class="btn btn-green" onclick="openWhatsApp('${shop.phone}',window._reshareText);closeModal('modal-resend')">📲 Send on WhatsApp</button>
-    <button class="btn btn-outline" onclick="copyText(window._reshareText);showToast('✅ Copied');closeModal('modal-resend')" style="margin-top:6px">📋 Copy Text</button>
-  `;
-  document.getElementById('modal-resend').classList.add('open');
-}
-
-// ── MANAGE ITEMS (add/edit SKU) ──
-function openManageItems(){
-  const modal=document.getElementById('modal-manage-items');
-  renderItemsList();
-  modal.classList.add('open');
-}
-
+// ══ MANAGE ITEMS ══
 function renderItemsList(){
   const el=document.getElementById('items-list');
   el.innerHTML=SKUS.map((s,i)=>`
-    <div style="display:flex;align-items:center;gap:6px;padding:6px 0;border-bottom:1px solid var(--gray-2)">
-      <div style="flex:1">
-        <div style="font-weight:600;font-size:13px">${s.name}</div>
-        <div class="small">${s.unit} · ${s.pcs} pcs/crt · Rate: ₹${DB.rates&&DB.rates[s.name]!==undefined?DB.rates[s.name]:s.rate}</div>
-      </div>
-      <button onclick="editSKURate(${i})" style="border:none;background:var(--blue-l);color:var(--blue);border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700;cursor:pointer">✏️ Rate</button>
-      ${i>=25?`<button onclick="deleteSKU(${i})" style="border:none;background:var(--red-l);color:var(--red);border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700;cursor:pointer">🗑</button>`:''}
+    <div style="display:flex;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid var(--gray-2)">
+      <div style="flex:1"><div style="font-weight:600;font-size:12px">${s.name}</div>
+        <div class="sm">${s.unit} · ${s.pcs}pcs/crt · Rate: ₹${DB.rates&&DB.rates[s.name]!==undefined?DB.rates[s.name]:s.rate}</div></div>
+      <button onclick="editItemRate(${i})" style="border:none;background:var(--blue-l);color:var(--blue);border-radius:5px;padding:2px 7px;font-size:10px;font-weight:700;cursor:pointer">✏️ Rate</button>
+      ${i>=25?`<button onclick="removeItem(${i})" style="border:none;background:var(--red-l);color:var(--red);border-radius:5px;padding:2px 7px;font-size:10px;font-weight:700;cursor:pointer">🗑</button>`:''}
     </div>`).join('');
 }
-
-function addNewItem(){
-  const name=document.getElementById('new-item-name').value.trim();
-  const unit=document.getElementById('new-item-unit').value;
-  const pcs=parseInt(document.getElementById('new-item-pcs').value)||1;
-  const rate=parseFloat(document.getElementById('new-item-rate').value)||0;
+function addItem(){
+  const name=document.getElementById('ni-name').value.trim();
+  const unit=document.getElementById('ni-unit').value;
+  const pcs=parseInt(document.getElementById('ni-pcs').value)||1;
+  const rate=parseFloat(document.getElementById('ni-rate').value)||0;
   if(!name){showToast('Enter item name');return;}
   if(SKUS.find(s=>s.name.toLowerCase()===name.toLowerCase())){showToast('Item already exists');return;}
   SKUS.push({name,unit,pcs,rate});
   if(rate>0){if(!DB.rates)DB.rates={};DB.rates[name]=rate;}
-  DB.skus=[...SKUS];
-  saveDB();
-  ['new-item-name','new-item-pcs','new-item-rate'].forEach(id=>document.getElementById(id).value='');
-  renderItemsList();
-  showToast(`✅ ${name} added`);
+  DB.skus=[...SKUS];saveDB();
+  ['ni-name','ni-pcs','ni-rate'].forEach(id=>document.getElementById(id).value='');
+  renderItemsList();showToast(`✅ ${name} added`);
 }
-
-function editSKURate(i){
+function editItemRate(i){
   const s=SKUS[i];
-  const curRate=DB.rates&&DB.rates[s.name]!==undefined?DB.rates[s.name]:s.rate;
-  const newRate=parseFloat(prompt(`Set fixed rate for ${s.name} (current: ₹${curRate}):`));
-  if(isNaN(newRate)){return;}
-  if(!DB.rates) DB.rates={};
-  DB.rates[s.name]=newRate;
-  SKUS[i].rate=newRate;
-  DB.skus=[...SKUS];
-  saveDB(); renderItemsList(); buildChallanTable();
-  showToast(`✅ Rate for ${s.name} set to ₹${newRate}`);
+  const cur=DB.rates&&DB.rates[s.name]!==undefined?DB.rates[s.name]:s.rate;
+  const nr=parseFloat(prompt(`Rate for ${s.name} (current: ₹${cur}):`));
+  if(isNaN(nr))return;
+  if(!DB.rates)DB.rates={};
+  DB.rates[s.name]=nr;SKUS[i].rate=nr;DB.skus=[...SKUS];
+  saveDB();renderItemsList();buildChallanList();showToast(`✅ Rate set ₹${nr}`);
+}
+function removeItem(i){
+  if(!confirm(`Remove "${SKUS[i].name}"?`))return;
+  const name=SKUS[i].name;SKUS.splice(i,1);
+  if(DB.rates)delete DB.rates[name];DB.skus=[...SKUS];
+  saveDB();renderItemsList();showToast('🗑 Removed');
+}
+// Open manage items — render list each time
+const origOpenModal=openModal;
+function openModal(id){
+  document.getElementById(id).classList.add('open');
+  if(id==='m-items')renderItemsList();
 }
 
-function deleteSKU(i){
-  if(!confirm(`Remove "${SKUS[i].name}"?`)) return;
-  const name=SKUS[i].name;
-  SKUS.splice(i,1);
-  if(DB.rates) delete DB.rates[name];
-  DB.skus=[...SKUS];
-  saveDB(); renderItemsList();
-  showToast('🗑 Item removed');
-}
-
-// ── BACKUP / RESTORE ──
-function backupData(){
-  const data=JSON.stringify(DB);
-  const date=new Date().toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'2-digit'});
-  const summary=`Aayudhi Enterprises — Full Backup\nDate: ${date}\nShops: ${DB.shops.length}\nDiary entries: ${DB.diary.length}\nExpenses: ${(DB.expenses||[]).length}\n\n---DATA---\n${data}\n---END---`;
-  copyText(summary);
-  // Also try to open WhatsApp to self
-  showToast('✅ Backup copied — paste & send to yourself on WhatsApp');
-  if(confirm('Open WhatsApp to send backup to yourself?')){
-    window.open('https://wa.me/?text='+encodeURIComponent(summary),'_blank');
-  }
-}
-
-function restoreData(){
-  const input=prompt('Paste backup data here (paste the full text you backed up):');
-  if(!input) return;
-  try{
-    const start=input.indexOf('---DATA---');
-    const end=input.indexOf('---END---');
-    if(start<0||end<0){showToast('❌ Invalid backup — paste full backup text');return;}
-    const jsonStr=input.substring(start+10,end).trim();
-    const restored=JSON.parse(jsonStr);
-    if(!restored.shops||!restored.diary){showToast('❌ Invalid backup format');return;}
-    if(!confirm(`Restore backup?\nShops: ${restored.shops.length}\nDiary: ${restored.diary.length}\n\nThis will REPLACE all current data.`)) return;
-    DB=restored;
-    if(DB.skus&&DB.skus.length) SKUS=[...DB.skus];
-    if(DB.rates) SKUS.forEach((s,i)=>{if(DB.rates[s.name]!==undefined) s.rate=DB.rates[s.name];});
-    saveDB();
-    renderDiary(); renderShops(); renderReport(); updateDashboard();
-    showToast('✅ Data restored successfully');
-  }catch(e){
-    showToast('❌ Failed to restore — check backup text');
-  }
-}
-
-// ── INIT ──
-loadDB();
-// Restore user selection
-const uSel = document.getElementById('user-select');
-if(uSel) uSel.value = _currentUser;
-// Ensure new fields exist in older DB saves
-if(!DB.rates) DB.rates={};
-if(!DB.expenses) DB.expenses=[];
-if(!DB.nextExpId) DB.nextExpId=1;
-if(!DB.nextBillId) DB.nextBillId=1;
-document.getElementById('diary-date').value=todayStr();
-document.getElementById('order-date')&&(document.getElementById('order-date').value=todayStr());
-document.getElementById('exp-date')&&(document.getElementById('exp-date').value=todayStr());
-document.getElementById('challan-date')&&(document.getElementById('challan-date').value=todayStr());
-if(!DB.diary.length){
-  DB.diary=[
-    {date:'2026-05-16',paid:31000,cash:20230,online:0,inv:''},
-    {date:'2026-05-17',paid:30000,cash:27598,online:0,inv:''},
-    {date:'2026-05-18',paid:31000,cash:31861,online:28755,inv:''},
-    {date:'2026-05-19',paid:31000,cash:28063,online:0,inv:''},
-    {date:'2026-05-20',paid:26000,cash:29660,online:0,inv:''},
-    {date:'2026-05-21',paid:27500,cash:29314,online:0,inv:''},
-    {date:'2026-05-22',paid:27000,cash:27645,online:0,inv:''},
-    {date:'2026-05-23',paid:28000,cash:24270,online:0,inv:''},
-    {date:'2026-05-24',paid:28000,cash:28011,online:27413,inv:''},
-  ];
-  saveDB();
-}
-buildOrderTable();
+// ══ INIT ══
+initFirebase();
+document.getElementById('diary-date').value=today();
+document.getElementById('order-date')&&(document.getElementById('order-date').value=today());
+document.getElementById('exp-date')&&(document.getElementById('exp-date').value=today());
+document.getElementById('c-date')&&(document.getElementById('c-date').value=today());
+const uSel=document.getElementById('user-select');
+if(uSel)uSel.value=_currentUser;
+buildOrderList();
 renderDiary();
 updateDashboard();
 </script>
-
-<!-- MODAL: MANAGE ITEMS -->
-<div class="modal-overlay" id="modal-manage-items">
-  <div class="modal">
-    <div class="modal-handle"></div>
-    <div class="modal-title">📦 Manage Items & Rates</div>
-
-    <div style="background:var(--blue-l);border-radius:8px;padding:10px;margin-bottom:10px;font-size:12px;color:var(--blue-d)">
-      Set fixed rate here — auto-fills in every challan. You can still change it per bill if needed. Rate field turns green when rate is set.
-    </div>
-
-    <div class="section-hdr">Add New Item</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
-      <div>
-        <div style="font-size:11px;font-weight:600;margin-bottom:3px">Item Name *</div>
-        <input type="text" id="new-item-name" placeholder="e.g. Gud Dahi" style="padding:7px 8px;font-size:13px">
-      </div>
-      <div>
-        <div style="font-size:11px;font-weight:600;margin-bottom:3px">Unit</div>
-        <select id="new-item-unit" style="padding:7px 8px;font-size:13px">
-          <option value="CRT">CRT</option>
-          <option value="PCS">PCS</option>
-        </select>
-      </div>
-      <div>
-        <div style="font-size:11px;font-weight:600;margin-bottom:3px">Pcs per CRT</div>
-        <input type="number" id="new-item-pcs" placeholder="e.g. 24" inputmode="numeric" style="padding:7px 8px;font-size:13px">
-      </div>
-      <div>
-        <div style="font-size:11px;font-weight:600;margin-bottom:3px">Fixed Rate (₹)</div>
-        <input type="number" id="new-item-rate" placeholder="e.g. 35" inputmode="decimal" style="padding:7px 8px;font-size:13px">
-      </div>
-    </div>
-    <button class="btn btn-green" onclick="addNewItem()" style="margin-top:8px">➕ Add Item</button>
-
-    <div class="section-hdr">All Items</div>
-    <div id="items-list" style="max-height:280px;overflow-y:auto"></div>
-
-    <button class="btn btn-outline" onclick="closeModal('modal-manage-items')" style="margin-top:12px">Done</button>
-  </div>
-</div>
-
-
-<!-- MODAL: RESEND BILL -->
-<div class="modal-overlay" id="modal-resend">
-  <div class="modal">
-    <div class="modal-handle"></div>
-    <div class="modal-title">📋 Resend Bill</div>
-    <div id="modal-resend-content"></div>
-    <button class="btn btn-outline" onclick="closeModal('modal-resend')" style="margin-top:8px">Close</button>
-  </div>
-</div>
-
 </body>
 </html>
